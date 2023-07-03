@@ -19,7 +19,6 @@ public class Application extends javafx.application.Application {
         stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static void main(String[] args) {

@@ -5,19 +5,21 @@ import java.time.LocalDateTime;
 public class Person {
     private String firstName;
     private String lastName;
+    private String fatherName;
     private String address;
     private int contact;
     private int age;
     private int ID;
     private LocalDateTime registerData;
 
-    public Person(String firstName, String lastName, int contact, String address, int age, int ID) {
+    public Person(String firstName, String lastName, String fatherName, int contact, String address, int age, int ID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.contact = contact;
         this.address = address;
         this.age = age;
         this.ID = ID;
+        this.fatherName = fatherName;
         registerData = LocalDateTime.now();
     }
 
@@ -75,6 +77,14 @@ public class Person {
 
     protected void setAge(int age) {
         this.age = age;
+    }
+
+    protected String getFatherName() {
+        return fatherName;
+    }
+
+    protected void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
     }
 
 }

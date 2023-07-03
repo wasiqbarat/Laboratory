@@ -14,4 +14,8 @@ public class RespondFactory {
     }
 
 
+    public void getRespond() {
+        return;
+    }
+
 }

@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +27,6 @@ public class firstMenu {
 
     @FXML
     void loginButtonPressed(ActionEvent event) throws IOException {
-
         URL url = new File("src/main/resources/controllers/mainMenu.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -37,6 +35,6 @@ public class firstMenu {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
-        
     }
+
 }
