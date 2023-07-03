@@ -1,2 +1,5 @@
-package Responding;public class Respond {
+package Responding;
+
+public class Respond {
+
 }

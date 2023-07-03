@@ -1,2 +1,5 @@
-package classes;public class Test {
+package classes;
+
+public class Test {
+
 }

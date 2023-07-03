@@ -1,2 +1,5 @@
-package controllers;public class MainMenu {
+package controllers;
+
+public class MainMenu {
+
 }
