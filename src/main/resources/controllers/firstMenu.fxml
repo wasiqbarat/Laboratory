@@ -30,6 +30,11 @@
          </image>
       </ImageView>
       <Button fx:id="loginButtonPressed" layoutX="171.0" layoutY="301.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="25.0" prefWidth="216.0" text="Login" />
+      <Label fx:id="status" layoutX="169.0" layoutY="336.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
    <effect>
       <Blend mode="LIGHTEN" />

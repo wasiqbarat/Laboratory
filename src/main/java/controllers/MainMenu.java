@@ -1,5 +1,5 @@
 package controllers;
 
-public class MainMenu {
+public class MainMenu extends Controller{
 
 }
