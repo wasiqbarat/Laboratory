@@ -30,9 +30,14 @@
          </image>
       </ImageView>
       <Button fx:id="loginButtonPressed" layoutX="171.0" layoutY="301.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="25.0" prefWidth="216.0" text="Login" />
-      <Label fx:id="status" layoutX="169.0" layoutY="336.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0">
+      <Label fx:id="status" layoutX="169.0" layoutY="336.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0" textFill="#ee0909">
          <font>
             <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="status1" layoutX="14.0" layoutY="346.0" mouseTransparent="true" prefHeight="20.0" prefWidth="200.0" text="Developed by Wasiq Barat">
+         <font>
+            <Font name="W_lotas" size="10.0" />
          </font>
       </Label>
    </children>

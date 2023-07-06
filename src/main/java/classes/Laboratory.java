@@ -11,6 +11,7 @@ public class Laboratory {
     private ArrayList<Staff> staff;
     private ArrayList<Test> tests;
 
+
     protected String getName() {
         return name;
     }

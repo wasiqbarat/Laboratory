@@ -41,4 +41,14 @@ public class Role {
                 ", members=" + members +
                 '}';
     }
+
+    public String abilitiesToString() {
+        StringBuilder abilitiesString = new StringBuilder();
+
+        for (Ability ability : abilities) {
+            abilitiesString.append(ability.toString()).append(", ");
+        }
+
+        return abilitiesString.toString();
+    }
 }

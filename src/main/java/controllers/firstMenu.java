@@ -1,5 +1,6 @@
 package controllers;
 
+import classes.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,14 +51,12 @@ public class firstMenu extends Controller{
         boolean authenticUser = labsSystem.authentication(usernameString, passwordString);
 
         if (authenticUser) {
-            URL url = new File("src/main/resources/controllers/mainMenu.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
+            setCurrentUserName(usernameString);
+            setCurrentPassword(passwordString);
 
-            stage.setScene(scene);
-            stage.setMaximized(false);
-            stage.show();
+            labsSystem.log(usernameString, passwordString);
+
+            gotoMainMenu(event);
         }
         else {
             status.setText("Invalid username or email!");

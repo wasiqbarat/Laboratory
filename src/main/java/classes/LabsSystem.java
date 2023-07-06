@@ -5,14 +5,30 @@ import java.util.ArrayList;
 public class LabsSystem {
     private static LabsSystem labsSystem = null;
 
-    private ArrayList<Laboratory> laboratories;
+    private Laboratory laboratory;
     private ArrayList<Role> roles;
     private ArrayList<User> users;
+    private ArrayList<Log> logs;
+
+    public void log(String username, String password) {
+        Log log = new Log(username, password);
+        logs.add(log);
+    }
+
+    public ArrayList<Log> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(ArrayList<Log> logs) {
+        this.logs = logs;
+    }
 
     public LabsSystem() {
         users = new ArrayList<>();
-        laboratories = new ArrayList<>();
+        laboratory = new Laboratory();
         roles = new ArrayList<>();
+        logs = new ArrayList<>();
+
         ArrayList<Ability> ownerAbilities = new ArrayList<>();
         ownerAbilities.add(Ability.ADD_DOCTOR);
         ownerAbilities.add(Ability.REMOVE_DOCTOR);
@@ -53,18 +69,6 @@ public class LabsSystem {
         return false;
     }
 
-    public Laboratory getLaboratory(String name) {
-        for (Laboratory laboratory : laboratories) {
-            if (laboratory.getName().equals(name)) {
-                return laboratory;
-            }
-        }
-        return null;
-    }
-
-    public void addLaboratory(Laboratory laboratory) {
-        laboratories.add(laboratory);
-    }
 
     public ArrayList<Role> getRoles() {
         return roles;
