@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -54,14 +55,32 @@ public class MainMenu extends Controller implements Initializable {
     }
 
     @FXML
-    void newPatientButtonPressed(ActionEvent event) {
+    void newPatientButtonPressed(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/controllers/NewPatientMenu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = new Stage();
 
+        Scene scene = new Scene(root);
+        stage.setTitle("Sohail laboratory (Add new patient)");
+
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+
+        stage.setScene(scene);
+        stage.setMaximized(false);
+        stage.show();
     }
 
     @FXML
     void searchPatientButtonPressed(ActionEvent event) {
+        
+    }
+
+    @FXML
+    void financialDataButtonPressed(ActionEvent event) {
 
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,4 +99,5 @@ public class MainMenu extends Controller implements Initializable {
 
         footer.setText(log);
     }
+
 }

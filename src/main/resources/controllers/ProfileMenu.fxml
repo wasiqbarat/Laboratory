@@ -18,7 +18,7 @@
       <Label layoutX="33.0" layoutY="86.0" text="username" />
       <TextField fx:id="abilities" layoutX="104.0" layoutY="127.0" prefHeight="211.0" prefWidth="468.0" />
       <Label layoutX="33.0" layoutY="127.0" text="Abilities" />
-      <Button layoutX="104.0" layoutY="348.0" mnemonicParsing="false" onAction="#changePasswordButtonPressed" prefHeight="25.0" prefWidth="149.0" text="change password" />
+      <Button layoutX="104.0" layoutY="348.0" mnemonicParsing="false" onAction="#changePasswordButtonPressed" prefHeight="39.0" prefWidth="237.0" text="change password or username" />
       <Button layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#previous" prefHeight="39.0" prefWidth="97.0" text="&lt;- Main menu" />
    </children>
 </AnchorPane>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="166.0" prefWidth="665.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="166.0" prefWidth="672.0">
+               <top>
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="557.0" text="Patient information:" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </top>
+               <center>
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="300.0">
+                           <children>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Patient ID:" textAlignment="CENTER" textOverrun="CLIP">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="35.0" />
+                                 </padding>
+                              </Label>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Name:" textAlignment="CENTER" textOverrun="CLIP">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="35.0" />
+                                 </padding>
+                              </Label>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Father name:" textAlignment="CENTER" textOverrun="CLIP">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="35.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="111.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Age:" textAlignment="CENTER" textOverrun="CLIP">
+                                 <padding>
+                                    <Insets left="35.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="300.0">
+                           <children>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" right="2.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" right="2.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField layoutX="10.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" right="2.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" right="2.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="300.0" />
+                        <VBox prefHeight="200.0" prefWidth="300.0" />
+                        <VBox prefHeight="200.0" prefWidth="300.0" />
+                        <VBox prefHeight="200.0" prefWidth="300.0" />
+                     </children>
+                  </HBox>
+               </center>
+            </BorderPane>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

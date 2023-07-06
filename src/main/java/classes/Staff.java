@@ -7,4 +7,5 @@ public class Staff extends Person{
         super(firstName, lastName, fatherName, contact, address, age, staffCount + 1);
     }
 
+
 }

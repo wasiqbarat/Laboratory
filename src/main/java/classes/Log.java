@@ -13,7 +13,6 @@ public class Log {
         loginData = LocalDateTime.now();
     }
 
-
     public String getPassword() {
         return password;
     }

@@ -26,8 +26,15 @@ public class ProfileMenu extends Controller implements Initializable {
     private TextField userName;
 
     @FXML
-    void changePasswordButtonPressed(ActionEvent event) {
+    void changePasswordButtonPressed(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/controllers/changeUsernameOrPassword.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
 
+        stage.setScene(scene);
+        stage.setMaximized(false);
+        stage.show();
     }
 
     @FXML
