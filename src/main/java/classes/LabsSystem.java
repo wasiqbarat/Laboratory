@@ -10,6 +10,8 @@ public class LabsSystem {
     private ArrayList<User> users;
     private ArrayList<Log> logs;
 
+
+    
     public void log(String username, String password) {
         Log log = new Log(username, password);
         logs.add(log);
@@ -48,7 +50,7 @@ public class LabsSystem {
 
         // add user by default
         // user should change password after first login
-        User user = new User("admin", "admin", ownerRole);
+        User user = new User("wasiq", "123", ownerRole);
         users.add(user);
     }
 

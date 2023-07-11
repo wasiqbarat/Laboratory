@@ -34,6 +34,7 @@ public class MainMenu extends Controller implements Initializable {
 
     @FXML
     private TextField footer;
+
     @FXML
     private Button searchPatient;
 
@@ -72,7 +73,7 @@ public class MainMenu extends Controller implements Initializable {
 
     @FXML
     void searchPatientButtonPressed(ActionEvent event) {
-        
+
     }
 
     @FXML
