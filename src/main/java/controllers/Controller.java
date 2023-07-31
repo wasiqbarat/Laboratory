@@ -13,6 +13,7 @@ import java.net.URL;
 
 public class Controller {
     protected LabsSystem labsSystem;
+
     private static String currentUserName = "";
     private static String currentPassword = "";
 
@@ -51,6 +52,8 @@ public class Controller {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
+        stage.setWidth(900);
+        stage.setHeight(550);
         stage.setMaximized(false);
         stage.show();
     }

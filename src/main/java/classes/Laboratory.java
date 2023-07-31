@@ -11,6 +11,45 @@ public class Laboratory {
     private ArrayList<Staff> staff;
     private ArrayList<Test> tests;
 
+    public Laboratory() {
+        doctors = new ArrayList<>();
+        patients = new ArrayList<>();
+        staff = new ArrayList<>();
+        tests = new ArrayList<>();
+        testCreation();
+    }
+
+
+    private void testCreation() {
+        //1
+        Test Brucellosis = new Test("BRUCELLOSIS", 200);
+        TestParameter brucelosisAbortus = new InRangeTestParameter("BRUCELOSIS Abortus","1:20","", "1:80");
+        TestParameter brucelosisMelitensis = new InRangeTestParameter("BRUCELOSIS Melitensis","1:20","", "1:80");
+        Brucellosis.addParameter(brucelosisAbortus);
+        Brucellosis.addParameter(brucelosisMelitensis);
+        tests.add(Brucellosis);
+
+        //2
+        Test aptt = new Test("ACTIVATED PARCIAL THROMBIN TIM", 400);
+        TestParameter pt = new InRangeTestParameter("PT (PATIENT)", "", "Sec", "");
+        TestParameter ptC = new InRangeTestParameter("PT CONTROL", "14", "Sec", "");
+        TestParameter INR = new InRangeTestParameter("INR", "", "", "");
+        aptt.addParameter(pt);
+        aptt.addParameter(ptC);
+        aptt.addParameter(INR);
+        tests.add(aptt);
+
+        //3
+
+    }
+
+    public void addDoctor(Doctor doctor) {
+        doctors.add(doctor);
+    }
+
+    public void addStaff(Staff staff1) {
+        staff.add(staff1);
+    }
 
     protected String getName() {
         return name;

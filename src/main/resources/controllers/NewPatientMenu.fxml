@@ -4,23 +4,24 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewPatientMenu">
    <left>
       <HBox prefHeight="529.0" prefWidth="207.0" BorderPane.alignment="CENTER">
          <children>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="519.0" prefWidth="214.0">
                <children>
-                  <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="ID:" textAlignment="CENTER">
+                  <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Patient ID:" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -69,32 +70,32 @@
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="name" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                  <TextField fx:id="name" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Name">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="fatherName" layoutX="10.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                  <TextField fx:id="fatherName" layoutX="10.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="FatherName">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="contactNo" layoutX="10.0" layoutY="77.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                  <TextField fx:id="contactNo" layoutX="10.0" layoutY="77.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Contact No">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="address" layoutX="10.0" layoutY="102.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                  <TextField fx:id="address" layoutX="10.0" layoutY="102.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Address">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="processTime" layoutX="10.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                  <TextField fx:id="processTime" layoutX="10.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Process time">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="email" layoutX="10.0" layoutY="152.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                  <TextField fx:id="email" layoutX="10.0" layoutY="152.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Email">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
@@ -110,7 +111,7 @@
       </HBox>
    </left>
    <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="519.0" prefWidth="443.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="482.0" prefWidth="540.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="93.0" prefWidth="507.0">
                <children>
@@ -182,35 +183,107 @@
                         </VBox>
                      </content>
                      <padding>
-                        <Insets bottom="5.0" right="5.0" top="2.0" />
+                        <Insets right="2.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="2.0" />
+                     </HBox.margin>
+                  </TitledPane>
+                  <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="1000.0" text="Doctor">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <padding>
+                              <Insets right="2.0" />
+                           </padding>
+                           <children>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </ChoiceBox>
+                           </children>
+                        </VBox>
+                     </content>
+                     <padding>
+                        <Insets right="2.0" />
                      </padding>
                   </TitledPane>
-                  <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="1000.0" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
                </padding>
             </HBox>
-            <TitledPane animated="false" collapsible="false" prefHeight="417.0" prefWidth="480.0" text="Tests">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <padding>
-                        <Insets right="5.0" />
-                     </padding>
-                  </AnchorPane>
-              </content>
+            <TitledPane animated="false" collapsible="false" prefHeight="372.0" prefWidth="546.0" text="Tests">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
                </padding>
                <VBox.margin>
                   <Insets right="2.0" />
                </VBox.margin>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TextField prefHeight="35.0" prefWidth="531.0" promptText="Search test">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="3.0" left="5.0" />
+                           </padding>
+                        </TextField>
+                        <ListView prefHeight="267.0" prefWidth="531.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="3.0" />
+                           </padding>
+                        </ListView>
+                     </children>
+                  </VBox>
+               </content>
             </TitledPane>
          </children>
       </VBox>
    </center>
    <right>
-      <VBox prefHeight="519.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="TOP_CENTER" prefHeight="482.0" prefWidth="104.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="249.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="93.0" prefWidth="94.0" text="Receipt">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="10.0" layoutY="160.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="92.0" prefWidth="94.0" text="Result entry">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children></VBox>
    </right>
    <bottom>
       <HBox alignment="CENTER" prefHeight="47.0" prefWidth="941.0" BorderPane.alignment="CENTER">
@@ -222,6 +295,9 @@
                <padding>
                   <Insets bottom="4.0" top="4.0" />
                </padding>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
             <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="New" textFill="#00b227">
                <HBox.margin>

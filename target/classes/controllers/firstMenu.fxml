@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane cache="true" cacheHint="QUALITY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.firstMenu">
+<AnchorPane cache="true" cacheHint="QUALITY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.firstMenu">
    <children>
       <TextField id="userName" fx:id="username" layoutX="171.0" layoutY="166.0" prefHeight="53.0" prefWidth="216.0" />
       <PasswordField id="password" fx:id="password" layoutX="171.0" layoutY="226.0" onAction="#loginButtonPressed" prefHeight="53.0" prefWidth="216.0" />
@@ -24,7 +24,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="164.0" fitWidth="247.0" layoutX="154.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="149.0" fitWidth="216.0" layoutX="171.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/image1.jpg" />
          </image>
@@ -48,4 +48,3 @@
       <Blend mode="LIGHTEN" />
    </effect>
 </AnchorPane>
-

@@ -10,8 +10,17 @@ public class LabsSystem {
     private ArrayList<User> users;
     private ArrayList<Log> logs;
 
+    public static LabsSystem getInstance() {
+        if (labsSystem == null) {
+            labsSystem = new LabsSystem();
+        }
+        return labsSystem;
+    }
 
-    
+    public Laboratory getLaboratory() {
+        return laboratory;
+    }
+
     public void log(String username, String password) {
         Log log = new Log(username, password);
         logs.add(log);
@@ -26,6 +35,8 @@ public class LabsSystem {
     }
 
     public LabsSystem() {
+        laboratory = new Laboratory();
+
         users = new ArrayList<>();
         laboratory = new Laboratory();
         roles = new ArrayList<>();
@@ -54,23 +65,15 @@ public class LabsSystem {
         users.add(user);
     }
 
-    public static LabsSystem getInstance() {
-        if (labsSystem == null) {
-            labsSystem = new LabsSystem();
-        }
-        return labsSystem;
-    }
-
     public boolean authentication(String userName, String password) {
         for (User user: users) {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
                 return true;
             }
         }
-
+        
         return false;
     }
-
 
     public ArrayList<Role> getRoles() {
         return roles;

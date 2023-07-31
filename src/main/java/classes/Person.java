@@ -3,7 +3,7 @@ package classes;
 import java.time.LocalDateTime;
 
 public class Person {
-    private String firstName;
+    protected String firstName;
     private String lastName;
     private String fatherName;
     private String address;
@@ -23,67 +23,67 @@ public class Person {
         registerData = LocalDateTime.now();
     }
 
-    protected LocalDateTime getRegisterData() {
+    public LocalDateTime getRegisterData() {
         return registerData;
     }
 
-    protected void setRegisterData(LocalDateTime registerData) {
+    public void setRegisterData(LocalDateTime registerData) {
         this.registerData = registerData;
     }
 
-    protected int getID() {
+    public int getID() {
         return ID;
     }
 
-    protected void setID(int ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
-    protected String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    protected void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    protected String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    protected void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    protected int getContact() {
+    public int getContact() {
         return contact;
     }
 
-    protected void setContact(int contact) {
+    public void setContact(int contact) {
         this.contact = contact;
     }
 
-    protected String getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    protected void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    protected int getAge() {
+    public int getAge() {
         return age;
     }
 
-    protected void setAge(int age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
-    protected String getFatherName() {
+    public String getFatherName() {
         return fatherName;
     }
 
-    protected void setFatherName(String fatherName) {
+    public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
     }
 

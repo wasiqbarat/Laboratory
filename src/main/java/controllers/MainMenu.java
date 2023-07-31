@@ -68,6 +68,8 @@ public class MainMenu extends Controller implements Initializable {
 
         stage.setScene(scene);
         stage.setMaximized(false);
+        stage.setWidth(900);
+        stage.setHeight(550);
         stage.show();
     }
 
@@ -101,4 +103,88 @@ public class MainMenu extends Controller implements Initializable {
         footer.setText(log);
     }
 
+    @FXML
+    void LogOutButtonPressed(ActionEvent event) throws IOException {
+        setCurrentPassword(null);
+        setCurrentUserName(null);
+
+        URL url = new File("src/main/resources/controllers/firstMenu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+
+        stage.setWidth(540);
+        stage.setHeight(380);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    @FXML
+    void addNewDoctorButtonPressed(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/controllers/addNewDoctorMenu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Sohail laboratory (Add new Doctor)");
+
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
+    @FXML
+    void addNewStaffButtonPressed(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/controllers/addNewStaffMenu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Sohail laboratory (Add new Staff)");
+
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void addNewTestButtonPressed(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/controllers/addNewTestMenu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Sohail laboratory (Add new Test)");
+
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+
+        stage.setScene(scene);
+        stage.setMaximized(false);
+        stage.setWidth(900);
+        stage.setHeight(550);
+        stage.show();
+    }
+
+
+    @FXML
+    void systemInfoButtonPressed(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/controllers/systemInfoMenu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(root);
+        stage.setTitle("Sohail laboratory (System info)");
+
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+
+        stage.setScene(scene);
+        stage.setMaximized(false);
+        stage.setWidth(900);
+        stage.setHeight(550);
+        stage.show();
+    }
 }

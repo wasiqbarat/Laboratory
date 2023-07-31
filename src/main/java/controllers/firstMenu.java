@@ -61,10 +61,11 @@ public class firstMenu extends Controller {
             gotoMainMenu(event);
         }
         else {
-            status.setText("Invalid username or email!");
+            status.setText("Invalid username or password!");
         }
 
     }
+
 
     public void RegisterButtonPressed(ActionEvent actionEvent) throws IOException {
         URL url = new File("src/main/resources/controllers/RegisterMenu.fxml").toURI().toURL();
@@ -76,4 +77,6 @@ public class firstMenu extends Controller {
         stage.setMaximized(false);
         stage.show();
     }
+
+
 }
