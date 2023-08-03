@@ -15,11 +15,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
 
 public class MainMenu extends Controller implements Initializable {
 
@@ -48,6 +48,7 @@ public class MainMenu extends Controller implements Initializable {
         stage.setScene(scene);
         stage.setMaximized(false);
         stage.show();
+
     }
 
     @FXML
@@ -67,9 +68,9 @@ public class MainMenu extends Controller implements Initializable {
         stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
 
         stage.setScene(scene);
-        stage.setMaximized(false);
-        stage.setWidth(900);
-        stage.setHeight(550);
+        stage.setMaximized(true);
+        //stage.setWidth(900);
+        //stage.setHeight(550);
         stage.show();
     }
 

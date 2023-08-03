@@ -11,6 +11,7 @@ public class Person {
     private int age;
     private int ID;
     private LocalDateTime registerData;
+    private String nationalID;
 
     public Person(String firstName, String lastName, String fatherName, int contact, String address, int age, int ID) {
         this.firstName = firstName;
@@ -87,4 +88,11 @@ public class Person {
         this.fatherName = fatherName;
     }
 
+    public String getNationalID() {
+        return nationalID;
+    }
+
+    public void setNationalID(String nationalID) {
+        this.nationalID = nationalID;
+    }
 }

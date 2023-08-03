@@ -33,14 +33,14 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="23.0" />
          </font></Button>
-      <Label fx:id="status" layoutX="169.0" layoutY="336.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0" textFill="#ee0909">
+      <Label fx:id="status" layoutX="182.0" layoutY="336.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0" textFill="#ee0909">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="status1" layoutX="14.0" layoutY="346.0" mouseTransparent="true" prefHeight="20.0" prefWidth="200.0" text="Developed by Wasiq Barat">
+      <Label fx:id="status1" layoutX="198.0" layoutY="346.0" mouseTransparent="true" prefHeight="20.0" prefWidth="200.0" text="Developed by : Wasiq Barat" textFill="RED">
          <font>
-            <Font name="W_lotas" size="10.0" />
+            <Font name="Arial Bold" size="10.0" />
          </font>
       </Label>
    </children>

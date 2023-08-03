@@ -35,6 +35,9 @@ public class AddNewDoctorMenu extends Controller{
     private TextField userNameAuthentication;
 
     @FXML
+    private TextField nationalID;
+
+    @FXML
     void cancelButtonPressed(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -48,7 +51,7 @@ public class AddNewDoctorMenu extends Controller{
         String addressString = address.getText();
         String contactNoString = contactNo.getText();
         String ageString = age.getText();
-
+        String nationalIDString = nationalID.getText();
 
         String passwordString = passwordAuthentication.getText();
         String usernameString = userNameAuthentication.getText();
@@ -70,6 +73,8 @@ public class AddNewDoctorMenu extends Controller{
             checkIfEmpty(contactNo);
             checkIfEmpty(address);
             checkIfEmpty(age);
+            checkIfEmpty(nationalID);
+
             int age = 0;
             int contact = 0;
             try {
@@ -79,7 +84,7 @@ public class AddNewDoctorMenu extends Controller{
 
             }
 
-            Doctor doctor = new Doctor(firstNameString, lastNameString, fatherNameString, contact, addressString, age);
+            Doctor doctor = new Doctor(firstNameString, lastNameString, fatherNameString, contact, addressString, age, nationalIDString);
 
 
             try {
@@ -88,7 +93,7 @@ public class AddNewDoctorMenu extends Controller{
                 stage.close();
 
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
 
 

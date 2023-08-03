@@ -1,7 +1,6 @@
 package controllers;
 
-import classes.Doctor;
-import classes.Staff;
+import classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,7 +8,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class AddNewStaffMenu extends Controller{
+
+    @FXML
+    private PasswordField staffPassword;
+
+    @FXML
+    private TextField staffUsername;
 
     @FXML
     private TextField address;
@@ -36,6 +43,16 @@ public class AddNewStaffMenu extends Controller{
     private TextField userNameAuthentication;
 
     @FXML
+    private TextField nationalID;
+
+
+    @FXML
+    private TextField job;
+
+    @FXML
+    private TextField salary;
+
+    @FXML
     void cancelButtonPressed(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -49,7 +66,12 @@ public class AddNewStaffMenu extends Controller{
         String addressString = address.getText();
         String contactNoString = contactNo.getText();
         String ageString = age.getText();
+        String nationalIDString = nationalID.getText();
+        String jobString = job.getText();
+        String salaryString = salary.getText();
 
+        String staffPasswordString = staffPassword.getText();
+        String staffUsernameString = staffUsername.getText();
 
         String passwordString = passwordAuthentication.getText();
         String usernameString = userNameAuthentication.getText();
@@ -71,6 +93,12 @@ public class AddNewStaffMenu extends Controller{
             checkIfEmpty(contactNo);
             checkIfEmpty(address);
             checkIfEmpty(age);
+            checkIfEmpty(staffPassword);
+            checkIfEmpty(staffUsername);
+            checkIfEmpty(nationalID);
+            checkIfEmpty(job);
+            checkIfEmpty(salary);
+
             int age = 0;
             int contact = 0;
             try {
@@ -80,23 +108,30 @@ public class AddNewStaffMenu extends Controller{
 
             }
 
-            Staff staff = new Staff(firstNameString, lastNameString, fatherNameString, contact, addressString, age);
+            Staff staff = new Staff(firstNameString, lastNameString, fatherNameString, contact, addressString, age, jobString, nationalIDString, salaryString );
 
 
             try {
                 labsSystem.getLaboratory().addStaff(staff);
+
+                ArrayList<Ability> staffAbilities = new ArrayList<>();
+                staffAbilities.add(Ability.ADD_PATIENT);
+                staffAbilities.add(Ability.REMOVE_PATIENT);
+                Role staffRole = new Role("staff", staffAbilities);
+                User user = new User(staffUsernameString, staffPasswordString, staffRole);
+                labsSystem.addUser(user);
 
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
 
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
 
 
         }else {
-            userNameAuthentication.setText("invalid user or password!");
+            userNameAuthentication.setText("invalid username or password!");
             userNameAuthentication.requestFocus();
         }
     }
@@ -104,6 +139,12 @@ public class AddNewStaffMenu extends Controller{
     void checkIfEmpty(TextField textField) {
         if (textField.getText().isEmpty()) {
             textField.requestFocus();
+        }
+    }
+
+    void checkIfEmpty(PasswordField passwordField) {
+        if (passwordField.getText().isEmpty()) {
+            passwordField.requestFocus();
         }
     }
 

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewPatientMenu">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1058.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewPatientMenu">
    <left>
       <HBox prefHeight="529.0" prefWidth="207.0" BorderPane.alignment="CENTER">
          <children>
@@ -121,7 +121,7 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <RadioButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="300.0" prefWidth="100.0" selected="true" text="Male">
+                                    <RadioButton fx:id="male" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="300.0" prefWidth="100.0" selected="true" text="Male">
                                        <padding>
                                           <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                        </padding>
@@ -129,12 +129,12 @@
                                           <ToggleGroup fx:id="sex" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="300.0" prefWidth="100.0" text="Female" toggleGroup="$sex">
+                                    <RadioButton fx:id="female" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="300.0" prefWidth="100.0" text="Female" toggleGroup="$sex">
                                        <padding>
                                           <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                        </padding>
                                     </RadioButton>
-                                    <RadioButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="300.0" prefWidth="100.0" text="Child" toggleGroup="$sex">
+                                    <RadioButton fx:id="child" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="300.0" prefWidth="100.0" text="Child" toggleGroup="$sex">
                                        <padding>
                                           <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                        </padding>
@@ -151,22 +151,22 @@
                                           <Insets left="5.0" />
                                        </padding>
                                     </Label>
-                                    <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0">
+                                    <TextField fx:id="age" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0">
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
                                     </TextField>
-                                    <TitledPane animated="false" expanded="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Year (Default)">
+                                    <TitledPane fx:id="ageTitledPane" animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Year (Default)">
                                        <content>
                                           <VBox prefHeight="61.0" prefWidth="134.0">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" selected="true" text="Year">
+                                                <RadioButton fx:id="year" mnemonicParsing="false" selected="true" text="Year">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="a" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Month" toggleGroup="$a" />
-                                                <RadioButton mnemonicParsing="false" text="Day" toggleGroup="$a" />
+                                                <RadioButton fx:id="month" mnemonicParsing="false" text="Month" toggleGroup="$a" />
+                                                <RadioButton fx:id="day" mnemonicParsing="false" text="Day" toggleGroup="$a" />
                                              </children>
                                           </VBox>
                                        </content>
@@ -196,7 +196,7 @@
                               <Insets right="2.0" />
                            </padding>
                            <children>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
                                  <padding>
                                     <Insets left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -204,7 +204,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
+                              <ChoiceBox fx:id="doctorsChoiceBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0">
                                  <padding>
                                     <Insets left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -224,7 +224,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
                </padding>
             </HBox>
-            <TitledPane animated="false" collapsible="false" prefHeight="372.0" prefWidth="546.0" text="Tests">
+            <TitledPane animated="false" collapsible="false" prefHeight="457.0" prefWidth="715.0" text="Tests">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="2.0" />
                </padding>
@@ -234,7 +234,7 @@
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <TextField prefHeight="35.0" prefWidth="531.0" promptText="Search test">
+                        <TextField fx:id="testsTextField" prefHeight="35.0" prefWidth="531.0" promptText="Search test">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -242,7 +242,7 @@
                               <Insets bottom="3.0" left="5.0" />
                            </padding>
                         </TextField>
-                        <ListView prefHeight="267.0" prefWidth="531.0">
+                        <ListView prefHeight="270.0" prefWidth="683.0">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -288,7 +288,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="47.0" prefWidth="941.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" prefWidth="65.0" text="Cancel" textFill="#da1212">
+            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="45.0" prefWidth="65.0" text="Cancel" textFill="#da1212">
                <HBox.margin>
                   <Insets bottom="7.0" left="40.0" right="40.0" top="10.0" />
                </HBox.margin>
@@ -299,7 +299,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="New" textFill="#00b227">
+            <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newButtonPressed" prefHeight="45.0" prefWidth="115.0" text="New" textFill="#00b227">
                <HBox.margin>
                   <Insets bottom="7.0" left="40.0" right="40.0" top="10.0" />
                </HBox.margin>
@@ -310,7 +310,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="62.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" text="Save" textFill="#1ac610">
+            <Button alignment="CENTER" layoutX="62.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="45.0" prefWidth="151.0" text="Save" textFill="#1ac610">
                <HBox.margin>
                   <Insets bottom="7.0" left="40.0" right="40.0" top="10.0" />
                </HBox.margin>

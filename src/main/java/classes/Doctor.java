@@ -6,4 +6,9 @@ public class Doctor extends Person {
     public Doctor(String firstName, String lastName, String fatherName, int contact, String address, int age) {
         super(firstName, lastName, fatherName, contact, address, age, doctorCount + 1);
     }
+
+    public Doctor(String firstName, String lastName, String fatherName, int contact, String address, int age, String nationalID) {
+        super(firstName, lastName, fatherName, contact, address, age, doctorCount + 1);
+        this.setNationalID(nationalID);
+    }
 }

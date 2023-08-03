@@ -17,6 +17,7 @@ public class Laboratory {
         staff = new ArrayList<>();
         tests = new ArrayList<>();
         testCreation();
+        doctorCreation();
     }
 
 
@@ -42,6 +43,15 @@ public class Laboratory {
         //3
 
     }
+
+    private void doctorCreation() {
+        Doctor doctor1 = new Doctor("Alimohammad", "Samadi", "Dost mohammad", 1234, "ghor", 45, "p034");
+        doctors.add(doctor1);
+
+        Doctor doctor2 = new Doctor("GulAhmad", "Seadi", "Mohammad", 1234, "ghor", 45, "p034");
+        doctors.add(doctor2);
+    }
+
 
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);

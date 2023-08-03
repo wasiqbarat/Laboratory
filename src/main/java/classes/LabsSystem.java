@@ -71,7 +71,7 @@ public class LabsSystem {
                 return true;
             }
         }
-        
+
         return false;
     }
 
