@@ -1,33 +1,39 @@
 package controllers;
 
 import classes.Doctor;
+import classes.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class NewPatientMenu extends Controller implements Initializable {
     private String doctorName;
     private String patientSex;
     private String ageUnit;
-    private AutoCompletionBinding<String> autoCompletionBinding;
-    private String[] possibleSuggestions = {"hey", "wasiq", "jan", "salam", "chitor", "good", "hasti", "ok"};
-    private Set<String> possibleSuggestionSet = new HashSet<>(Arrays.asList(possibleSuggestions));
-
+    private LocalDateTime dateTime;
 
 
     @FXML
-    private Label ID;
+    private Label patientID;
 
     @FXML
     private ToggleGroup a;
@@ -54,7 +60,7 @@ public class NewPatientMenu extends Controller implements Initializable {
     private TextField fatherName;
 
     @FXML
-    private Label id;
+    private Label data;
 
     @FXML
     private TextField name;
@@ -86,16 +92,45 @@ public class NewPatientMenu extends Controller implements Initializable {
     @FXML
     private RadioButton year;
 
+    private void initializingRegisterData() {
+        dateTime = LocalDateTime.now();
+
+        DateTimeFormatter formatter
+                = DateTimeFormatter.ofPattern(
+                "yyyy-MM-dd | HH:mm a");
+
+        String loginTime = dateTime.format(formatter);
+
+        data.setText(loginTime);
+    }
+
+    private void initializingTests() {
+        ArrayList<String> testNames = new ArrayList<>();
+
+        for (Test test : labsSystem.getLaboratory().getTests()) {
+            testNames.add(test.getName());
+        }
+
+        TextFields.bindAutoCompletion(testsTextField, testNames).setOnAutoCompleted(e -> {
+            System.out.println("Test: " + testsTextField.getText());
+            testsTextField.setText("");
+        });
+
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TextFields.bindAutoCompletion(testsTextField, "hey", "ok", "ab", "cd", "ef");
-
-
+        initializingRegisterData();
+        //////////
+        initializingTests();
+        //////////
         initializingDoctors();
         //////////
         initializingAge();
         //////////
         initializingSex();
+
     }
 
     @FXML
@@ -105,8 +140,21 @@ public class NewPatientMenu extends Controller implements Initializable {
     }
 
     @FXML
-    void newButtonPressed(ActionEvent event) {
+    void newButtonPressed(ActionEvent event) throws IOException {
+        URL url = new File("src/main/resources/controllers/NewPatientMenu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        Stage stage = new Stage();
 
+        Scene scene = new Scene(root);
+        stage.setTitle("Sohail laboratory (Add new patient)");
+
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+
+        stage.setScene(scene);
+        stage.setMaximized(false);
+        //stage.setWidth(900);
+        //stage.setHeight(550);
+        stage.show();
     }
 
     @FXML

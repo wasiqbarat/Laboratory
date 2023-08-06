@@ -65,7 +65,7 @@
             </VBox>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="529.0" prefWidth="252.0">
                <children>
-                  <Label fx:id="id" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
+                  <Label fx:id="patientId" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
@@ -100,10 +100,13 @@
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label fx:id="ID" layoutX="15.0" layoutY="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
+                  <Label fx:id="data" focusTraversable="false" layoutX="15.0" layoutY="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
                      <VBox.margin>
                         <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
                      </VBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
                </children>
             </VBox>
@@ -156,7 +159,7 @@
                                           <Insets left="5.0" />
                                        </padding>
                                     </TextField>
-                                    <TitledPane fx:id="ageTitledPane" animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Year (Default)">
+                                    <TitledPane fx:id="ageTitledPane" expanded="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Year (Default)">
                                        <content>
                                           <VBox prefHeight="61.0" prefWidth="134.0">
                                              <children>
@@ -242,7 +245,7 @@
                               <Insets bottom="3.0" left="5.0" />
                            </padding>
                         </TextField>
-                        <ListView prefHeight="270.0" prefWidth="683.0">
+                        <ListView prefHeight="346.0" prefWidth="683.0">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>

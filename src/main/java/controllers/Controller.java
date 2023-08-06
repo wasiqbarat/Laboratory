@@ -54,6 +54,7 @@ public class Controller {
         stage.setScene(scene);
         stage.setWidth(900);
         stage.setHeight(550);
+        stage.setResizable(true);
         stage.setMaximized(false);
         stage.show();
     }

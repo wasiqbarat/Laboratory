@@ -6,4 +6,5 @@ module com.example.laboratory {
 
     exports controllers;
     opens controllers to javafx.fxml;
+
 }

@@ -68,7 +68,7 @@ public class MainMenu extends Controller implements Initializable {
         stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
 
         stage.setScene(scene);
-        stage.setMaximized(true);
+        stage.setMaximized(false);
         //stage.setWidth(900);
         //stage.setHeight(550);
         stage.show();
@@ -99,7 +99,7 @@ public class MainMenu extends Controller implements Initializable {
         String loginTime = LocalDateTime.now().format(formatter);
         String identity = "You are logged in as (" + getCurrentUserName() + ")";
 
-        log =identity +  "        login time(زمان ورود): ".concat(loginTime);
+        log = identity +  "        login time(زمان ورود): ".concat(loginTime);
 
         footer.setText(log);
     }
@@ -114,12 +114,14 @@ public class MainMenu extends Controller implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
 
-        stage.setWidth(540);
-        stage.setHeight(380);
         stage.setScene(scene);
+
+        stage.setHeight(450);
+        stage.setWidth(600);
+
+        stage.setResizable(false);
         stage.show();
     }
-
 
     @FXML
     void addNewDoctorButtonPressed(ActionEvent event) throws IOException {
@@ -128,7 +130,7 @@ public class MainMenu extends Controller implements Initializable {
         Stage stage = new Stage();
 
         Scene scene = new Scene(root);
-        stage.setTitle("Sohail laboratory (Add new Doctor)");
+        stage.setTitle("Sohail laboratory");
 
         stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
 
@@ -144,7 +146,7 @@ public class MainMenu extends Controller implements Initializable {
         Stage stage = new Stage();
 
         Scene scene = new Scene(root);
-        stage.setTitle("Sohail laboratory (Add new Staff)");
+        stage.setTitle("Sohail laboratory");
 
         stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
 
@@ -169,7 +171,6 @@ public class MainMenu extends Controller implements Initializable {
         stage.setHeight(550);
         stage.show();
     }
-
 
     @FXML
     void systemInfoButtonPressed(ActionEvent event) throws IOException {

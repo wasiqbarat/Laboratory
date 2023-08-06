@@ -4,47 +4,52 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane cache="true" cacheHint="QUALITY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.firstMenu">
+<StackPane prefHeight="410.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.firstMenu">
    <children>
-      <TextField id="userName" fx:id="username" layoutX="171.0" layoutY="166.0" prefHeight="53.0" prefWidth="216.0" />
-      <PasswordField id="password" fx:id="password" layoutX="171.0" layoutY="226.0" onAction="#loginButtonPressed" prefHeight="53.0" prefWidth="216.0" />
-      <Label layoutX="78.0" layoutY="243.0" prefHeight="19.0" prefWidth="81.0" text="Password:">
-         <font>
-            <Font name="Arial" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="78.0" layoutY="183.0" mouseTransparent="true" prefHeight="20.0" prefWidth="87.0" text="User name:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="149.0" fitWidth="216.0" layoutX="171.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/image1.jpg" />
-         </image>
-      </ImageView>
-      <Button fx:id="loginButtonPressed" layoutX="171.0" layoutY="293.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="41.0" prefWidth="216.0" text="Log in" textFill="#4bbf4b">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="23.0" />
-         </font></Button>
-      <Label fx:id="status" layoutX="182.0" layoutY="336.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0" textFill="#ee0909">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="status1" layoutX="198.0" layoutY="346.0" mouseTransparent="true" prefHeight="20.0" prefWidth="200.0" text="Developed by : Wasiq Barat" textFill="RED">
-         <font>
-            <Font name="Arial Bold" size="10.0" />
-         </font>
-      </Label>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane fx:id="pictureAnchorPane" layoutX="1.0" prefHeight="371.0" prefWidth="276.0">
+               <children>
+                  <ImageView fitHeight="413.0" fitWidth="288.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/6.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="buttonsAnchorPane" layoutX="268.0" prefHeight="413.0" prefWidth="304.0">
+               <children>
+                  <Label fx:id="status" layoutX="44.0" layoutY="273.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0" textFill="#ee0909">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="status1" layoutX="90.0" layoutY="358.0" mouseTransparent="true" prefHeight="30.0" prefWidth="200.0" text="Developed by Wasiq Barat" textFill="#485097">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="loginButton" layoutX="44.0" layoutY="283.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="43.0" prefWidth="238.0" text="Login" textFill="#47c2e8">
+                     <font>
+                        <Font name="Arial Black" size="23.0" />
+                     </font>
+                  </Button>
+                  <TextField id="userName" fx:id="username" layoutX="44.0" layoutY="186.0" prefHeight="41.0" prefWidth="238.0" promptText="Username" />
+                  <PasswordField id="password" fx:id="password" layoutX="44.0" layoutY="232.0" onAction="#loginButtonPressed" prefHeight="41.0" prefWidth="238.0" promptText="Password" />
+                  <ImageView fitHeight="101.0" fitWidth="111.0" layoutX="102.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/report.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
-   <effect>
-      <Blend mode="LIGHTEN" />
-   </effect>
-</AnchorPane>
+</StackPane>
