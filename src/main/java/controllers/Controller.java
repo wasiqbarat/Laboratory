@@ -52,11 +52,14 @@ public class Controller {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setWidth(900);
-        stage.setHeight(550);
-        stage.setResizable(true);
+        //stage.setWidth(900);
+        //stage.setHeight(550);
+
+        stage.setResizable(false);
         stage.setMaximized(false);
         stage.show();
     }
+
+
 }
 

@@ -25,7 +25,7 @@
             </AnchorPane>
             <AnchorPane fx:id="buttonsAnchorPane" layoutX="268.0" prefHeight="413.0" prefWidth="304.0">
                <children>
-                  <Label fx:id="status" layoutX="44.0" layoutY="273.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0" textFill="#ee0909">
+                  <Label fx:id="status" layoutX="66.0" layoutY="338.0" mouseTransparent="true" prefHeight="20.0" prefWidth="216.0" textFill="#ee0909">
                      <font>
                         <Font size="14.0" />
                      </font>

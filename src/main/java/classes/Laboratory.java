@@ -1,5 +1,8 @@
 package classes;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.ArrayList;
 
 public class Laboratory {
@@ -22,19 +25,39 @@ public class Laboratory {
 
 
     private void testCreation() {
-        //1
+   /*     //1
         Test Brucellosis = new Test("BRUCELLOSIS", 200);
-        TestParameter brucelosisAbortus = new InRangeTestParameter("BRUCELOSIS Abortus","1:20","", "1:80");
-        TestParameter brucelosisMelitensis = new InRangeTestParameter("BRUCELOSIS Melitensis","1:20","", "1:80");
+        TestParameter brucelosisAbortus = new InRangeTestParameter("BRUCELOSIS Abortus","","1:80","1:20","BRUCELLOSIS", 200);
+        TestParameter brucelosisMelitensis = new InRangeTestParameter("BRUCELOSIS Melitensis","","1:80", "1:20","BRUCELLOSIS", 200);
         Brucellosis.addParameter(brucelosisAbortus);
         Brucellosis.addParameter(brucelosisMelitensis);
+
         tests.add(Brucellosis);
 
         //2
         Test aptt = new Test("ACTIVATED PARCIAL THROMBIN TIM", 400);
-        TestParameter pt = new InRangeTestParameter("PT (PATIENT)", "", "Sec", "");
-        TestParameter ptC = new InRangeTestParameter("PT CONTROL", "14", "Sec", "");
-        TestParameter INR = new InRangeTestParameter("INR", "", "", "");
+        TestParameter pt = new InRangeTestParameter("PT (PATIENT)", "Sec", "", "", "ACTIVATED PARCIAL THROMBIN TIM", 400);
+        TestParameter ptC = new InRangeTestParameter("PT CONTROL", "Sec", "", "14", "ACTIVATED PARCIAL THROMBIN TIM", 400);
+        TestParameter INR = new InRangeTestParameter("INR", "", "", "", "ACTIVATED PARCIAL THROMBIN TIM", 400);
+        aptt.addParameter(pt);
+        aptt.addParameter(ptC);
+        aptt.addParameter(INR);
+        tests.add(aptt);*/
+
+        //1
+        Test Brucellosis = new Test("BRUCELLOSIS", 200);
+        TestParameter brucelosisAbortus = new InRangeTestParameter(new SimpleStringProperty("BRUCELOSIS Abortus"), new SimpleStringProperty(""), new SimpleStringProperty("1:80"), new SimpleStringProperty("1:20"), new SimpleStringProperty("BRUCELLOSIS"), new SimpleDoubleProperty(200) );
+        TestParameter brucelosisMelitensis = new InRangeTestParameter(new SimpleStringProperty("BRUCELOSIS Melitensis"),new SimpleStringProperty(""),new SimpleStringProperty("1:80"),new SimpleStringProperty( "1:20"),new SimpleStringProperty("BRUCELLOSIS"), new SimpleDoubleProperty(200));
+        Brucellosis.addParameter(brucelosisAbortus);
+        Brucellosis.addParameter(brucelosisMelitensis);
+
+        tests.add(Brucellosis);
+
+        //2
+        Test aptt = new Test("ACTIVATED PARCIAL THROMBIN TIM", 400);
+        TestParameter pt = new InRangeTestParameter(new SimpleStringProperty("PT (PATIENT)"), new SimpleStringProperty("Sec"), new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty("ACTIVATED PARCIAL THROMBIN TIM"), new SimpleDoubleProperty(400));
+        TestParameter ptC = new InRangeTestParameter(new SimpleStringProperty("PT CONTROL"), new SimpleStringProperty("Sec"), new SimpleStringProperty(""), new SimpleStringProperty("14"), new SimpleStringProperty("ACTIVATED PARCIAL THROMBIN TIM"), new SimpleDoubleProperty(400));
+        TestParameter INR = new InRangeTestParameter(new SimpleStringProperty("INR"),new SimpleStringProperty( ""), new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty("ACTIVATED PARCIAL THROMBIN TIM"), new SimpleDoubleProperty(400));
         aptt.addParameter(pt);
         aptt.addParameter(ptC);
         aptt.addParameter(INR);
@@ -52,6 +75,17 @@ public class Laboratory {
         doctors.add(doctor2);
     }
 
+
+    public Test getTest(String testName) {
+        Test test = new Test("no test", 0);
+        for (Test t : tests) {
+            if (t.getName().equals(testName)) {
+                test = t;
+            }
+        }
+
+        return test;
+    }
 
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);

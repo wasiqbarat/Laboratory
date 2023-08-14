@@ -13,7 +13,6 @@ public enum Ability {
 
     public static Ability getAbility(String ability) {
         switch (ability) {
-
             case "addStaff" -> {
                 return ADD_STAFF;
             }

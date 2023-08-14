@@ -1,7 +1,12 @@
 package controllers;
 
 import classes.Doctor;
+import classes.LineNumbersCellFactory;
 import classes.Test;
+import classes.TestParameter;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,11 +17,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -24,13 +30,39 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class NewPatientMenu extends Controller implements Initializable {
-    private String doctorName;
-    private String patientSex;
+    private String doctorName = "";
+    private String patientSex = "";
     private String ageUnit;
     private LocalDateTime dateTime;
+    private ArrayList<String> selectedTests = new ArrayList<>();
+    private ArrayList<Test> selectedTest = new ArrayList<>();
 
+    @FXML
+    private TextField removeTest;
+
+    @FXML
+    private TableView<TestParameter> testsTableView;
+
+    @FXML
+    private TableColumn<TestParameter, String> testNameColumn;
+
+    @FXML
+    private TableColumn<TestParameter, String> parameterColumn;
+
+    @FXML
+    private TableColumn no;
+
+    @FXML
+    private TableColumn<TestParameter, String> normalRangeColumn;
+
+    @FXML
+    private TableColumn<TestParameter, String> testResultColumn;
+
+    @FXML
+    private TableColumn<TestParameter, String> unitColumn;
 
     @FXML
     private Label patientID;
@@ -112,16 +144,123 @@ public class NewPatientMenu extends Controller implements Initializable {
         }
 
         TextFields.bindAutoCompletion(testsTextField, testNames).setOnAutoCompleted(e -> {
-            System.out.println("Test: " + testsTextField.getText());
+            selectedTest.add(labsSystem.getLaboratory().getTest(testsTextField.getText()));
+
+            selectedTests.add(testsTextField.getText());
+            initializeRemoveTests();
+
+            System.out.println("Added Test: " + testsTextField.getText());
+            System.out.println("New tests: ");
+
+            for (String name: selectedTests) {
+                System.out.println(name);
+            }
+
             testsTextField.setText("");
+            initializingTestsTableView();
         });
+    }
+
+    private void initializeRemoveTests() {
+        TextFields.bindAutoCompletion(removeTest, selectedTests).setOnAutoCompleted(e -> {
+            selectedTest.removeIf(test -> test.getName().equals(removeTest.getText()));
+
+            selectedTests.remove(removeTest.getText());
+
+            System.out.println("Removed test: " + removeTest.getText());
+            System.out.println("Tests: ");
+            for (String name: selectedTests) {
+                System.out.println(name);
+            }
+            removeTest.setText("");
+            initializingTestsTableView();
+        });
+    }
 
 
+    private void initializingTestsTableView() {
+        ArrayList<TestParameter> testParameters = new ArrayList<>();
+
+        for (Test test : selectedTest) {
+            testParameters.addAll(test.getParameters());
+        }
+
+        ObservableList<TestParameter> list = FXCollections.observableArrayList(testParameters);
+        /////////////
+
+        no.setCellFactory(new LineNumbersCellFactory());
+
+        ///////////
+        testNameColumn.setCellValueFactory(new PropertyValueFactory<>("testName"));
+        testNameColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
+
+        testNameColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TestParameter, String> t) -> {
+                    ((TestParameter) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setTestName(t.getNewValue());
+                }
+        );
+        /////////////////
+        parameterColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        parameterColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
+
+        parameterColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TestParameter, String> t) -> {
+                    ((TestParameter) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setTestName(t.getNewValue());
+
+                }
+        );
+        /////////////////
+        testResultColumn.setCellValueFactory(new PropertyValueFactory<>("result"));
+        testResultColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
+
+        testResultColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TestParameter, String> t) -> {
+                    ((TestParameter) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setTestName(t.getNewValue());
+
+                }
+        );
+        /////////
+        unitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        unitColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
+
+        unitColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TestParameter, String> t) -> {
+                    ((TestParameter) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setTestName(t.getNewValue());
+                }
+        );
+        //////
+        normalRangeColumn.setCellValueFactory(new PropertyValueFactory<>("normalRange"));
+        normalRangeColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
+
+        normalRangeColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TestParameter, String> t) -> {
+                    ((TestParameter) t.getTableView().getItems().get(
+
+                            t.getTablePosition().getRow())
+                    ).setTestName(t.getNewValue());
+                    System.out.println(t.getNewValue());
+                }
+
+        );
+
+
+        testsTableView.setItems(list);
+        testsTableView.setEditable(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializingRegisterData();
+        //////////
+
+        //initializeRemoveTests();
         //////////
         initializingTests();
         //////////
@@ -130,14 +269,18 @@ public class NewPatientMenu extends Controller implements Initializable {
         initializingAge();
         //////////
         initializingSex();
+        //////
 
+        initializingTestsTableView();
     }
+
 
     @FXML
     void cancelButtonPressed(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
+
 
     @FXML
     void newButtonPressed(ActionEvent event) throws IOException {
@@ -210,6 +353,5 @@ public class NewPatientMenu extends Controller implements Initializable {
             }
         });
     }
-
 
 }

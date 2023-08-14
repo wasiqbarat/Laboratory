@@ -1,6 +1,5 @@
 package classes;
 
-import java.net.PortUnreachableException;
 import java.util.ArrayList;
 
 public class Test {
@@ -19,6 +18,7 @@ public class Test {
         this.price = price;
         this.parameters = parameters;
     }
+
 
     public void addParameter(TestParameter parameter) {
         parameters.add(parameter);
@@ -50,5 +50,14 @@ public class Test {
 
     public void setParameters(ArrayList<TestParameter> parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", parameters=" + parameters +
+                '}';
     }
 }

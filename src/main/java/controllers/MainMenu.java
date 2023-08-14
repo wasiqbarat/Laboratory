@@ -69,8 +69,11 @@ public class MainMenu extends Controller implements Initializable {
 
         stage.setScene(scene);
         stage.setMaximized(false);
-        //stage.setWidth(900);
-        //stage.setHeight(550);
+        stage.setMinWidth(1100);
+        stage.setMinHeight(700);
+
+        stage.setHeight(550);
+        stage.setWidth(900);
         stage.show();
     }
 
@@ -170,6 +173,7 @@ public class MainMenu extends Controller implements Initializable {
         stage.setWidth(900);
         stage.setHeight(550);
         stage.show();
+
     }
 
     @FXML
