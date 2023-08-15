@@ -1,7 +1,5 @@
 package classes;
 
-import java.time.LocalDateTime;
-
 public class Person {
     protected String firstName;
     private String lastName;
@@ -9,36 +7,17 @@ public class Person {
     private String address;
     private int contact;
     private int age;
-    private int ID;
-    private LocalDateTime registerData;
     private String nationalID;
 
-    public Person(String firstName, String lastName, String fatherName, int contact, String address, int age, int ID) {
+    public Person(String firstName, String lastName, String fatherName, int contact, String address, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.contact = contact;
         this.address = address;
         this.age = age;
-        this.ID = ID;
         this.fatherName = fatherName;
-        registerData = LocalDateTime.now();
     }
 
-    public LocalDateTime getRegisterData() {
-        return registerData;
-    }
-
-    public void setRegisterData(LocalDateTime registerData) {
-        this.registerData = registerData;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -94,5 +73,18 @@ public class Person {
 
     public void setNationalID(String nationalID) {
         this.nationalID = nationalID;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fatherName='" + fatherName + '\'' +
+                ", address='" + address + '\'' +
+                ", contact=" + contact +
+                ", age=" + age +
+                ", nationalID='" + nationalID + '\'' +
+                '}';
     }
 }

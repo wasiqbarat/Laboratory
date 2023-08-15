@@ -62,6 +62,12 @@ public class MainMenu extends Controller implements Initializable {
         Parent root = FXMLLoader.load(url);
         Stage stage = new Stage();
 
+     /*   stage.setMaximized(false);
+        stage.setMinWidth(1100);
+        stage.setMinHeight(700);
+        stage.setHeight(550);
+        stage.setWidth(900);
+        */
         Scene scene = new Scene(root);
         stage.setTitle("Sohail laboratory (Add new patient)");
 
@@ -69,11 +75,6 @@ public class MainMenu extends Controller implements Initializable {
 
         stage.setScene(scene);
         stage.setMaximized(false);
-        stage.setMinWidth(1100);
-        stage.setMinHeight(700);
-
-        stage.setHeight(550);
-        stage.setWidth(900);
         stage.show();
     }
 
@@ -170,8 +171,7 @@ public class MainMenu extends Controller implements Initializable {
 
         stage.setScene(scene);
         stage.setMaximized(false);
-        stage.setWidth(900);
-        stage.setHeight(550);
+
         stage.show();
 
     }

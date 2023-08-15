@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Laboratory {
     private String name;
@@ -14,15 +15,43 @@ public class Laboratory {
     private ArrayList<Staff> staff;
     private ArrayList<Test> tests;
 
+    //map patient to its appointments
+    private HashMap<Patient, ArrayList<Appointment> > appointmentsHashMap;
+
     public Laboratory() {
         doctors = new ArrayList<>();
         patients = new ArrayList<>();
         staff = new ArrayList<>();
         tests = new ArrayList<>();
+        appointmentsHashMap = new HashMap<>();
         testCreation();
         doctorCreation();
     }
 
+    public HashMap<Patient, ArrayList<Appointment>> getAppointmentsHashMap() {
+        return appointmentsHashMap;
+    }
+
+    public void setAppointmentsHashMap(HashMap<Patient, ArrayList<Appointment>> appointmentsHashMap) {
+        this.appointmentsHashMap = appointmentsHashMap;
+    }
+
+    public void addTest(Test test) {
+        tests.add(test);
+    }
+
+    public void addAppointment(Patient patient, Appointment appointment) {
+        ArrayList<Appointment> appointments;
+
+        if (appointmentsHashMap.containsKey(patient)) {
+            appointments = appointmentsHashMap.get(patient);
+        }else {
+            appointments = new ArrayList<>();
+        }
+        appointments.add(appointment);
+        appointmentsHashMap.put(patient, appointments);
+
+    }
 
     private void testCreation() {
    /*     //1
@@ -68,10 +97,10 @@ public class Laboratory {
     }
 
     private void doctorCreation() {
-        Doctor doctor1 = new Doctor("Alimohammad", "Samadi", "Dost mohammad", 1234, "ghor", 45, "p034");
+        Doctor doctor1 = new Doctor("Alimohammad", "Samadi", "Dost mohammad", 1234, "ghor", 45, "p034", 1);
         doctors.add(doctor1);
 
-        Doctor doctor2 = new Doctor("GulAhmad", "Seadi", "Mohammad", 1234, "ghor", 45, "p034");
+        Doctor doctor2 = new Doctor("GulAhmad", "Seadi", "Mohammad", 1234, "ghor", 45, "p034", 2);
         doctors.add(doctor2);
     }
 
@@ -142,5 +171,6 @@ public class Laboratory {
     public void setTests(ArrayList<Test> tests) {
         this.tests = tests;
     }
+
 
 }

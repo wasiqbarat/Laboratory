@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -48,15 +49,21 @@ public class Controller {
     public void gotoMainMenu(ActionEvent event) throws IOException {
         URL url = new File("src/main/resources/controllers/mainMenu.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
         Scene scene = new Scene(root);
+        stage.setTitle("Sohail laboratory");
 
         stage.setScene(scene);
-        //stage.setWidth(900);
-        //stage.setHeight(550);
+        stage.setWidth(950);
+        stage.setHeight(640);
 
-        stage.setResizable(false);
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\report.png"));
+
+        stage.setResizable(true);
+
         stage.setMaximized(false);
+
         stage.show();
     }
 

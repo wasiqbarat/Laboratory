@@ -1,14 +1,23 @@
 package classes;
 
+import java.time.LocalDateTime;
+
 public class Doctor extends Person {
-    protected static final int doctorCount = 0;
 
-    public Doctor(String firstName, String lastName, String fatherName, int contact, String address, int age) {
-        super(firstName, lastName, fatherName, contact, address, age, doctorCount + 1);
+    private final int ID;
+    private final LocalDateTime registerData;
+
+    public Doctor(String firstName, String lastName, String fatherName, int contact, String address, int age, int id) {
+        super(firstName, lastName, fatherName, contact, address, age);
+        ID = id;
+        registerData = LocalDateTime.now();
     }
-
-    public Doctor(String firstName, String lastName, String fatherName, int contact, String address, int age, String nationalID) {
-        super(firstName, lastName, fatherName, contact, address, age, doctorCount + 1);
+    public Doctor(String firstName, String lastName, String fatherName, int contact, String address, int age, String nationalID, int id) {
+        super(firstName, lastName, fatherName, contact, address, age);
+        ID = id;
         this.setNationalID(nationalID);
+        registerData = LocalDateTime.now();
+
     }
+
 }

@@ -4,9 +4,11 @@ import classes.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,8 +52,10 @@ public class ChangeUsernameOrPassword extends Controller implements Initializabl
                         setCurrentPassword(newPassword.getText());
                     }
                 }
-
                 gotoMainMenu(event);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.close();
+
             }else {
                 status.setText("Please re-enter the new password!");
                 newPassword.selectAll();
@@ -68,6 +72,9 @@ public class ChangeUsernameOrPassword extends Controller implements Initializabl
     @FXML
     void cancelButtonPressed(ActionEvent event) throws IOException {
         gotoMainMenu(event);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @Override

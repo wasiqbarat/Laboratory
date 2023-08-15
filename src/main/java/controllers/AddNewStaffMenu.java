@@ -87,17 +87,17 @@ public class AddNewStaffMenu extends Controller{
 
 
         if (labsSystem.authentication(usernameString, passwordString)) {
-            checkIfEmpty(firstName);
-            checkIfEmpty(lastName);
-            checkIfEmpty(fatherName);
-            checkIfEmpty(contactNo);
-            checkIfEmpty(address);
-            checkIfEmpty(age);
-            checkIfEmpty(staffPassword);
-            checkIfEmpty(staffUsername);
-            checkIfEmpty(nationalID);
-            checkIfEmpty(job);
             checkIfEmpty(salary);
+            checkIfEmpty(job);
+            checkIfEmpty(nationalID);
+            checkIfEmpty(staffUsername);
+            checkIfEmpty(staffPassword);
+            checkIfEmpty(age);
+            checkIfEmpty(address);
+            checkIfEmpty(contactNo);
+            checkIfEmpty(fatherName);
+            checkIfEmpty(lastName);
+            checkIfEmpty(firstName);
 
             int age = 0;
             int contact = 0;
@@ -108,7 +108,7 @@ public class AddNewStaffMenu extends Controller{
 
             }
 
-            Staff staff = new Staff(firstNameString, lastNameString, fatherNameString, contact, addressString, age, jobString, nationalIDString, salaryString );
+            Staff staff = new Staff(firstNameString, lastNameString, fatherNameString, contact, addressString, age, jobString, nationalIDString, salaryString, labsSystem.getLaboratory().getStaff().size() + 1);
 
 
             try {

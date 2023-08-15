@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -18,7 +17,7 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NewPatientMenu">
    <left>
-      <HBox prefHeight="551.0" prefWidth="274.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="551.0" prefWidth="230.0" BorderPane.alignment="CENTER">
          <children>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="519.0" prefWidth="214.0">
                <children>
@@ -64,46 +63,49 @@
                   </Label>
                </children>
             </VBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="551.0" prefWidth="318.0">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="551.0" prefWidth="277.0">
                <children>
-                  <Label fx:id="patientId" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
+                  <Label fx:id="patientID" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="name" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Name">
+                  <TextField fx:id="name" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#nameTextFieldAction" prefHeight="300.0" promptText="Name">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="fatherName" layoutX="10.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="FatherName">
+                  <TextField fx:id="fatherName" layoutX="10.0" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#fatherNameTextFieldAction" prefHeight="300.0" promptText="FatherName">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="contactNo" layoutX="10.0" layoutY="77.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Contact No">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="address" layoutX="10.0" layoutY="102.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Address">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="processTime" layoutX="10.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Process time">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="email" layoutX="10.0" layoutY="152.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" promptText="Email">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
                   </TextField>
                   <Label fx:id="data" focusTraversable="false" layoutX="15.0" layoutY="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" text="Label">
                      <VBox.margin>
-                        <Insets bottom="12.0" left="2.0" right="4.0" top="12.0" />
+                        <Insets bottom="17.0" left="2.0" right="4.0" top="17.0" />
                      </VBox.margin>
                      <font>
                         <Font name="System Bold" size="10.0" />
@@ -155,7 +157,7 @@
                                           <Insets left="5.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="age" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0">
+                                    <TextField fx:id="age" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#ageTextFieldAction" prefWidth="100.0">
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
@@ -238,9 +240,9 @@
                <content>
                   <VBox prefHeight="502.0" prefWidth="704.0">
                      <children>
-                        <HBox prefHeight="37.0" prefWidth="617.0">
+                        <HBox prefHeight="39.0" prefWidth="691.0">
                            <children>
-                              <TextField fx:id="testsTextField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="500.0" promptText="Add test">
+                              <TextField fx:id="testsTextField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#testsTextFieldAction" prefHeight="300.0" prefWidth="500.0" promptText="Add test">
                                  <padding>
                                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                  </padding>
@@ -258,15 +260,18 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <TableView fx:id="testsTableView" prefHeight="359.0" prefWidth="617.0">
+                        <TableView fx:id="testsTableView" prefHeight="365.0" prefWidth="691.0">
                            <columns>
-                              <TableColumn fx:id="no" maxWidth="1000.0" prefWidth="58.0" text="NO." />
-                              <TableColumn fx:id="testNameColumn" maxWidth="1000.0" prefWidth="105.0" text="Test name" />
-                              <TableColumn fx:id="parameterColumn" maxWidth="1000.0" prefWidth="106.0" text="Parameter" />
-                              <TableColumn fx:id="testResultColumn" maxWidth="1000.0" prefWidth="71.0" text="Test result" />
-                              <TableColumn fx:id="unitColumn" maxWidth="1000.0" prefWidth="137.0" text="unit" />
-                              <TableColumn fx:id="normalRangeColumn" maxWidth="1000.0" prefWidth="126.0" text="Normal Range" />
-                           </columns></TableView>
+                              <TableColumn fx:id="no" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" text="NO." />
+                              <TableColumn fx:id="testNameColumn" maxWidth="1000.0" minWidth="0.0" prefWidth="218.0" text="Test name" />
+                              <TableColumn fx:id="parameterColumn" maxWidth="1000.0" prefWidth="156.0" text="Parameter" />
+                              <TableColumn fx:id="testResultColumn" maxWidth="1000.0" prefWidth="68.0" text="Result" />
+                              <TableColumn fx:id="unitColumn" maxWidth="1000.0" prefWidth="75.0" text="unit" />
+                              <TableColumn fx:id="normalRangeColumn" maxWidth="1000.0" prefWidth="94.0" text="Normal Range" />
+                           </columns>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></TableView>
                      </children>
                   </VBox>
                </content>
@@ -277,33 +282,37 @@
    <right>
       <VBox alignment="TOP_CENTER" prefHeight="482.0" prefWidth="104.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="249.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="93.0" prefWidth="94.0" text="Receipt">
+            <TitledPane animated="false" collapsible="false" prefHeight="251.0" prefWidth="104.0" text="Cost">
+               <content>
+                  <VBox prefHeight="164.0" prefWidth="102.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="89.0" text="Total (AF):" />
+                        <TextField fx:id="totalCost" editable="false" focusTraversable="false" />
+                     </children>
+                  </VBox>
+               </content>
+               <VBox.margin>
+                  <Insets right="5.0" />
+               </VBox.margin>
+            </TitledPane>
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="59.0" prefWidth="64.0" text="Print">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
+                  <Insets right="5.0" top="10.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="160.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="92.0" prefWidth="94.0" text="Result entry">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-         </children></VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets top="2.0" />
+         </BorderPane.margin></VBox>
    </right>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="941.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="1059.0" BorderPane.alignment="CENTER">
          <children>
             <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="45.0" prefWidth="65.0" text="Cancel" textFill="#da1212">
                <HBox.margin>

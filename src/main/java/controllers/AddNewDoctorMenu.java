@@ -67,13 +67,13 @@ public class AddNewDoctorMenu extends Controller{
 
 
         if (labsSystem.authentication(usernameString, passwordString)) {
-            checkIfEmpty(firstName);
-            checkIfEmpty(lastName);
-            checkIfEmpty(fatherName);
-            checkIfEmpty(contactNo);
-            checkIfEmpty(address);
-            checkIfEmpty(age);
             checkIfEmpty(nationalID);
+            checkIfEmpty(age);
+            checkIfEmpty(address);
+            checkIfEmpty(contactNo);
+            checkIfEmpty(fatherName);
+            checkIfEmpty(lastName);
+            checkIfEmpty(firstName);
 
             int age = 0;
             int contact = 0;
@@ -84,7 +84,8 @@ public class AddNewDoctorMenu extends Controller{
 
             }
 
-            Doctor doctor = new Doctor(firstNameString, lastNameString, fatherNameString, contact, addressString, age, nationalIDString);
+
+            Doctor doctor = new Doctor(firstNameString, lastNameString, fatherNameString, contact, addressString, age, nationalIDString, labsSystem.getLaboratory().getDoctors().size() + 1);
 
 
             try {

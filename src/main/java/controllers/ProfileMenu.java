@@ -40,6 +40,9 @@ public class ProfileMenu extends Controller implements Initializable {
     @FXML
     void previous(ActionEvent event) throws IOException {
         gotoMainMenu(event);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.close();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Test {
     private String name;
@@ -19,6 +20,18 @@ public class Test {
         this.parameters = parameters;
     }
 
+    public void updateParameter(TestParameter testParameter) {
+        Iterator<TestParameter> iterator = parameters.iterator();
+        while (iterator.hasNext()) {
+            TestParameter testParameter1 = iterator.next();
+            if (testParameter1.getName().equals(testParameter.getName())) {
+                int index = parameters.indexOf(testParameter1);
+                parameters.add(index, testParameter);
+                iterator.remove();
+            }
+        }
+
+    }
 
     public void addParameter(TestParameter parameter) {
         parameters.add(parameter);
@@ -57,7 +70,7 @@ public class Test {
         return "Test{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", parameters=" + parameters +
+                ",\n parameters=" + parameters +
                 '}';
     }
 }

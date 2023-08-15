@@ -1,12 +1,6 @@
 package controllers;
 
-import classes.Doctor;
-import classes.LineNumbersCellFactory;
-import classes.Test;
-import classes.TestParameter;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
+import classes.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
@@ -30,15 +23,21 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class NewPatientMenu extends Controller implements Initializable {
-    private String doctorName = "";
-    private String patientSex = "";
+    private String doctorName;
+    private String patientSex;
     private String ageUnit;
     private LocalDateTime dateTime;
     private ArrayList<String> selectedTests = new ArrayList<>();
     private ArrayList<Test> selectedTest = new ArrayList<>();
+    private Patient patient = null;
+    private Appointment appointment = null;
+    private double totalCostDouble = 0;
+
+
+    @FXML
+    private TextField totalCost;
 
     @FXML
     private TextField removeTest;
@@ -53,7 +52,7 @@ public class NewPatientMenu extends Controller implements Initializable {
     private TableColumn<TestParameter, String> parameterColumn;
 
     @FXML
-    private TableColumn no;
+    private TableColumn<TestParameter, Integer> no;
 
     @FXML
     private TableColumn<TestParameter, String> normalRangeColumn;
@@ -124,6 +123,142 @@ public class NewPatientMenu extends Controller implements Initializable {
     @FXML
     private RadioButton year;
 
+    @FXML
+    void saveButtonPressed(ActionEvent event) {
+        String nameString = name.getText();
+        String fatherNameString = fatherName.getText();
+        String contactString = contactNo.getText();
+        String addressString = address.getText();
+        String processTimeString = processTime.getText();
+        String emailString = email.getText();
+
+        if (name.getText().isEmpty()) {
+            name.requestFocus();
+            return;
+        }
+
+        if (fatherName.getText().isEmpty()) {
+            fatherName.requestFocus();
+            return;
+        }
+        if (age.getText().isEmpty()) {
+            age.requestFocus();
+            return;
+        }
+
+
+        int intAge = 0;
+        int intContact;
+
+        try {
+            intAge = Integer.parseInt(age.getText());
+        } catch (Exception e) {
+            age.requestFocus();
+            e.printStackTrace();
+        }
+
+        try {
+            intContact = Integer.parseInt(contactNo.getText());
+        }catch (Exception e) {
+            intContact = 0;
+        }
+
+        switch (patientSex) {
+            case "Male" -> {
+                patient = new MalePatient(nameString, "", fatherNameString, intContact, addressString, intAge, labsSystem.getLaboratory().getAppointmentsHashMap().size() + 1);
+            }
+            case "Female" -> {
+                patient = new femalePatient(nameString, "", fatherNameString, intContact, addressString, intAge, labsSystem.getLaboratory().getAppointmentsHashMap().size() + 1);
+            }
+            case "Child" -> {
+                patient = new childPatient(nameString, "", fatherNameString, intContact, addressString, intAge, labsSystem.getLaboratory().getAppointmentsHashMap().size() + 1);
+            }
+        }
+
+        patient.setAgeUnit(ageUnit);
+        if (selectedTest.isEmpty()) {
+            testsTextField.requestFocus();
+            return;
+        } else {
+            appointment = new Appointment(patient, doctorName, selectedTest);
+            appointment.setTotalFee(totalCostDouble);
+        }
+
+        ///{{{{ a popup menu}}}}}}}
+
+        try {
+            labsSystem.getLaboratory().addAppointment(patient, appointment);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void initializeID(Label label) {
+        label.setText(String.valueOf(labsSystem.getLaboratory().getAppointmentsHashMap().size() + 1));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeID(patientID);
+
+        initializingDoctors();
+        initializingAge();
+        initializingSex();
+
+
+        initializingRegisterData();
+        //////////
+        //initializeRemoveTests();
+        //////////
+        initializingTests();
+
+        initializingTestsTableView();
+        testNameColumn.setEditable(false);
+        parameterColumn.setEditable(false);
+
+        no.setEditable(false);
+    }
+
+    private void initializingTests() {
+        ArrayList<String> testNames = new ArrayList<>();
+
+        for (Test test : labsSystem.getLaboratory().getTests()) {
+            testNames.add(test.getName() + "-> " + test.getPrice() + " AF");
+        }
+
+        TextFields.bindAutoCompletion(testsTextField, testNames).setOnAutoCompleted(e -> {
+            String testName;
+            testName = testsTextField.getText().split("->")[0];
+
+            if (!selectedTests.contains(testsTextField.getText())) {
+                selectedTest.add(labsSystem.getLaboratory().getTest(testName));
+                selectedTests.add(testsTextField.getText());
+                totalCostDouble += labsSystem.getLaboratory().getTest(testName).getPrice();
+                totalCost.setText(String.valueOf(totalCostDouble));
+
+
+            }else {
+                testsTextField.setText("");
+                return;
+            }
+
+
+            System.out.println("Added Test: " + testsTextField.getText());
+            System.out.println("New tests: ");
+
+            for (String name: selectedTests) {
+                System.out.println(name);
+            }
+
+            initializeRemoveTests();
+            testsTextField.setText("");
+            initializingTestsTableView();
+        });
+    }
+
     private void initializingRegisterData() {
         dateTime = LocalDateTime.now();
 
@@ -136,47 +271,27 @@ public class NewPatientMenu extends Controller implements Initializable {
         data.setText(loginTime);
     }
 
-    private void initializingTests() {
-        ArrayList<String> testNames = new ArrayList<>();
-
-        for (Test test : labsSystem.getLaboratory().getTests()) {
-            testNames.add(test.getName());
-        }
-
-        TextFields.bindAutoCompletion(testsTextField, testNames).setOnAutoCompleted(e -> {
-            selectedTest.add(labsSystem.getLaboratory().getTest(testsTextField.getText()));
-
-            selectedTests.add(testsTextField.getText());
-            initializeRemoveTests();
-
-            System.out.println("Added Test: " + testsTextField.getText());
-            System.out.println("New tests: ");
-
-            for (String name: selectedTests) {
-                System.out.println(name);
-            }
-
-            testsTextField.setText("");
-            initializingTestsTableView();
-        });
-    }
-
     private void initializeRemoveTests() {
         TextFields.bindAutoCompletion(removeTest, selectedTests).setOnAutoCompleted(e -> {
-            selectedTest.removeIf(test -> test.getName().equals(removeTest.getText()));
+            String testToRemove;
+            testToRemove = removeTest.getText().split("-")[0];
+            selectedTest.removeIf(test -> test.getName().equals(testToRemove));
+            totalCostDouble -= labsSystem.getLaboratory().getTest(testsTextField.getText()).getPrice();
+            totalCost.setText(String.valueOf(totalCostDouble));
 
             selectedTests.remove(removeTest.getText());
 
             System.out.println("Removed test: " + removeTest.getText());
             System.out.println("Tests: ");
+
             for (String name: selectedTests) {
                 System.out.println(name);
             }
+
             removeTest.setText("");
             initializingTestsTableView();
         });
     }
-
 
     private void initializingTestsTableView() {
         ArrayList<TestParameter> testParameters = new ArrayList<>();
@@ -188,42 +303,29 @@ public class NewPatientMenu extends Controller implements Initializable {
         ObservableList<TestParameter> list = FXCollections.observableArrayList(testParameters);
         /////////////
 
+        // initializing row counter column
         no.setCellFactory(new LineNumbersCellFactory());
 
         ///////////
         testNameColumn.setCellValueFactory(new PropertyValueFactory<>("testName"));
         testNameColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
-
-        testNameColumn.setOnEditCommit(
-                (TableColumn.CellEditEvent<TestParameter, String> t) -> {
-                    ((TestParameter) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())
-                    ).setTestName(t.getNewValue());
-                }
-        );
         /////////////////
         parameterColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         parameterColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
+        ////////////////
 
-        parameterColumn.setOnEditCommit(
-                (TableColumn.CellEditEvent<TestParameter, String> t) -> {
-                    ((TestParameter) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())
-                    ).setTestName(t.getNewValue());
-
-                }
-        );
-        /////////////////
         testResultColumn.setCellValueFactory(new PropertyValueFactory<>("result"));
         testResultColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
 
+
         testResultColumn.setOnEditCommit(
                 (TableColumn.CellEditEvent<TestParameter, String> t) -> {
-                    ((TestParameter) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setTestName(t.getNewValue());
-
+                    ((InRangeTestParameter) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setResult(t.getNewValue());
+                    testsTableView.requestFocus();
                 }
         );
+
         /////////
         unitColumn.setCellValueFactory(new PropertyValueFactory<>("unit"));
         unitColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
@@ -232,46 +334,26 @@ public class NewPatientMenu extends Controller implements Initializable {
                 (TableColumn.CellEditEvent<TestParameter, String> t) -> {
                     ((TestParameter) t.getTableView().getItems().get(
                             t.getTablePosition().getRow())
-                    ).setTestName(t.getNewValue());
+                    ).setUnit(t.getNewValue());
+                    testsTableView.requestFocus();
                 }
         );
-        //////
+        ////////
+
         normalRangeColumn.setCellValueFactory(new PropertyValueFactory<>("normalRange"));
         normalRangeColumn.setCellFactory(TextFieldTableCell.<TestParameter>forTableColumn());
 
         normalRangeColumn.setOnEditCommit(
                 (TableColumn.CellEditEvent<TestParameter, String> t) -> {
                     ((TestParameter) t.getTableView().getItems().get(
-
                             t.getTablePosition().getRow())
-                    ).setTestName(t.getNewValue());
-                    System.out.println(t.getNewValue());
+                    ).setNormalRange(t.getNewValue());
+                    testsTableView.requestFocus();
                 }
-
         );
-
 
         testsTableView.setItems(list);
         testsTableView.setEditable(true);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializingRegisterData();
-        //////////
-
-        //initializeRemoveTests();
-        //////////
-        initializingTests();
-        //////////
-        initializingDoctors();
-        //////////
-        initializingAge();
-        //////////
-        initializingSex();
-        //////
-
-        initializingTestsTableView();
     }
 
 
@@ -300,11 +382,6 @@ public class NewPatientMenu extends Controller implements Initializable {
         stage.show();
     }
 
-    @FXML
-    void saveButtonPressed(ActionEvent event) {
-
-    }
-
 
     private void initializingDoctors() {
         ArrayList<Doctor> doctorsArraylist = labsSystem.getLaboratory().getDoctors();
@@ -316,7 +393,16 @@ public class NewPatientMenu extends Controller implements Initializable {
 
         ObservableList<String> doctors = FXCollections.observableArrayList(doctorsNames);
         doctorsChoiceBox.setItems(doctors);
-        doctorsChoiceBox.setValue(doctorsNames.get(0));
+
+        try {
+            doctorsChoiceBox.setValue(doctorsNames.get(0));
+            doctorName = doctorsNames.get(0);
+
+        }catch (Exception e) {
+            doctorName = "";
+            e.printStackTrace();
+        }
+
 
         doctorsChoiceBox.setOnAction(e -> {
             String selectedValue = doctorsChoiceBox.getValue();
@@ -330,6 +416,8 @@ public class NewPatientMenu extends Controller implements Initializable {
         male.setToggleGroup(sex);
         female.setToggleGroup(sex);
         child.setToggleGroup(sex);
+
+        patientSex = "Male";
 
         sex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -345,6 +433,8 @@ public class NewPatientMenu extends Controller implements Initializable {
         month.setToggleGroup(a);
         day.setToggleGroup(a);
 
+        ageUnit = "Year";
+
         a.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 System.out.println("Age unit Selected option: " + ( (RadioButton) newValue).getText() );
@@ -352,6 +442,28 @@ public class NewPatientMenu extends Controller implements Initializable {
                 ageTitledPane.setText(ageUnit);
             }
         });
+
+
+    }
+
+    @FXML
+    void testsTextFieldAction(ActionEvent event) {
+        testsTableView.requestFocus();
+    }
+
+    @FXML
+    void ageTextFieldAction(ActionEvent event) {
+        testsTextField.requestFocus();
+    }
+
+    @FXML
+    void fatherNameTextFieldAction(ActionEvent event) {
+        age.requestFocus();
+    }
+
+    @FXML
+    void nameTextFieldAction(ActionEvent event) {
+        fatherName.requestFocus();
     }
 
 }
