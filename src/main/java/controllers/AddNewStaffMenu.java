@@ -8,9 +8,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class AddNewStaffMenu extends Controller{
+public class AddNewStaffMenu extends Controller {
 
     @FXML
     private PasswordField staffPassword;
@@ -85,19 +87,43 @@ public class AddNewStaffMenu extends Controller{
             return;
         }
 
+        checkIfEmpty(salary);
+        checkIfEmpty(job);
+        checkIfEmpty(nationalID);
+        checkIfEmpty(staffUsername);
+        checkIfEmpty(staffPassword);
+        checkIfEmpty(age);
+        checkIfEmpty(address);
+        checkIfEmpty(contactNo);
+        checkIfEmpty(fatherName);
+        checkIfEmpty(lastName);
+        checkIfEmpty(firstName);
 
-        if (labsSystem.authentication(usernameString, passwordString)) {
-            checkIfEmpty(salary);
-            checkIfEmpty(job);
-            checkIfEmpty(nationalID);
-            checkIfEmpty(staffUsername);
-            checkIfEmpty(staffPassword);
-            checkIfEmpty(age);
-            checkIfEmpty(address);
-            checkIfEmpty(contactNo);
-            checkIfEmpty(fatherName);
-            checkIfEmpty(lastName);
-            checkIfEmpty(firstName);
+        ArrayList<String> usernames = new ArrayList<>();
+        for (User user : labsSystem.getUsers()) {
+            usernames.add(user.getUserName());
+        }
+
+        User admin = labsSystem.getUser(usernameString);
+        if (admin == null) {
+            userNameAuthentication.setText("User not existed!");
+            userNameAuthentication.requestFocus();
+            return;
+        }
+
+        if (admin.getRole().hasAbility(Ability.ADD_STAFF) ) {
+
+            if (!admin.getPassword().equals(passwordString)) {
+                passwordAuthentication.requestFocus();
+                return;
+            }
+
+            if (usernames.contains(staffUsernameString)) {
+                staffUsername.setText("Already exists!");
+                staffUsername.requestFocus();
+                return;
+            }
+
 
             int age = 0;
             int contact = 0;
@@ -121,9 +147,14 @@ public class AddNewStaffMenu extends Controller{
                 User user = new User(staffUsernameString, staffPasswordString, staffRole);
                 labsSystem.addUser(user);
 
+                Log log = new Log(getCurrentUserName(), getCurrentPassword(), "Add new staff");
+                log.setInfo("New added Staff:\n" + "name: " + firstNameString + " " + lastNameString + "\nNational ID: "
+                        + nationalIDString + "\nRegister Date: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a")));
+                labsSystem.addLog(log);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -131,9 +162,10 @@ public class AddNewStaffMenu extends Controller{
 
 
         }else {
-            userNameAuthentication.setText("invalid username or password!");
+            userNameAuthentication.setText("You are not allowed!");
             userNameAuthentication.requestFocus();
         }
+
     }
 
     void checkIfEmpty(TextField textField) {

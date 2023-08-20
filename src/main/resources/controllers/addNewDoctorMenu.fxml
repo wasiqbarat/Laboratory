@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddNewDoctorMenu">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddNewDoctorMenu">
    <left>
-      <TitledPane animated="false" collapsible="false" prefHeight="397.0" prefWidth="642.0" text="Add new doctor" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" prefHeight="485.0" prefWidth="707.0" text="Add new doctor" BorderPane.alignment="CENTER">
          <content>
             <HBox prefHeight="371.0" prefWidth="647.0" spacing="15.0">
                <children>

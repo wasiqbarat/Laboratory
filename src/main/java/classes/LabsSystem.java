@@ -21,8 +21,12 @@ public class LabsSystem {
         return laboratory;
     }
 
-    public void log(String username, String password) {
-        Log log = new Log(username, password);
+    public void log(String username, String password, String action) {
+        Log log = new Log(username, password, action);
+        logs.add(log);
+    }
+
+    public void addLog(Log log) {
         logs.add(log);
     }
 
@@ -51,6 +55,7 @@ public class LabsSystem {
         ownerAbilities.add(Ability.REMOVE_TEST);
         ownerAbilities.add(Ability.ADD_STAFF);
         ownerAbilities.add(Ability.REMOVE_STAFF);
+        ownerAbilities.add(Ability.SYSTEM_INFO);
 
         Role ownerRole = new Role("owner", ownerAbilities);
 
@@ -63,6 +68,15 @@ public class LabsSystem {
         // user should change password after first login
         User user = new User("wasiq", "123", ownerRole);
         users.add(user);
+    }
+
+    public User getUser(String userName) {
+        for (User user : users) {
+            if (user.getUserName().equals(userName)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public boolean authentication(String userName, String password) {

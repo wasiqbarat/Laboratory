@@ -14,7 +14,6 @@ module com.example.laboratory {
     requires javafx.fxml;
     requires org.controlsfx.controls;
 
-
     exports controllers;
     exports classes;
 

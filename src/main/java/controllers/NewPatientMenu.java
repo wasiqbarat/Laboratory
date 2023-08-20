@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
@@ -23,6 +24,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
 
 public class NewPatientMenu extends Controller implements Initializable {
     private String doctorName;
@@ -155,11 +157,13 @@ public class NewPatientMenu extends Controller implements Initializable {
         } catch (Exception e) {
             age.requestFocus();
             e.printStackTrace();
+            return;
         }
 
         try {
             intContact = Integer.parseInt(contactNo.getText());
         }catch (Exception e) {
+            contactNo.requestFocus();
             intContact = 0;
         }
 
@@ -188,11 +192,17 @@ public class NewPatientMenu extends Controller implements Initializable {
 
         try {
             labsSystem.getLaboratory().addAppointment(patient, appointment);
+
+            Log log = new Log(getCurrentUserName(), getCurrentPassword(), "Add new patient");
+            log.setInfo(appointment.toString());
+            labsSystem.addLog(log);
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -211,7 +221,7 @@ public class NewPatientMenu extends Controller implements Initializable {
 
         initializingRegisterData();
         //////////
-        //initializeRemoveTests();
+        initializeRemoveTests();
         //////////
         initializingTests();
 
@@ -229,7 +239,9 @@ public class NewPatientMenu extends Controller implements Initializable {
             testNames.add(test.getName() + "-> " + test.getPrice() + " AF");
         }
 
-        TextFields.bindAutoCompletion(testsTextField, testNames).setOnAutoCompleted(e -> {
+        AutoCompletionBinding autoCompletionBinding = TextFields.bindAutoCompletion(testsTextField, testNames);
+
+        autoCompletionBinding.setOnAutoCompleted(e -> {
             String testName;
             testName = testsTextField.getText().split("->")[0];
 
@@ -238,13 +250,10 @@ public class NewPatientMenu extends Controller implements Initializable {
                 selectedTests.add(testsTextField.getText());
                 totalCostDouble += labsSystem.getLaboratory().getTest(testName).getPrice();
                 totalCost.setText(String.valueOf(totalCostDouble));
-
-
             }else {
                 testsTextField.setText("");
                 return;
             }
-
 
             System.out.println("Added Test: " + testsTextField.getText());
             System.out.println("New tests: ");
@@ -257,22 +266,14 @@ public class NewPatientMenu extends Controller implements Initializable {
             testsTextField.setText("");
             initializingTestsTableView();
         });
-    }
 
-    private void initializingRegisterData() {
-        dateTime = LocalDateTime.now();
-
-        DateTimeFormatter formatter
-                = DateTimeFormatter.ofPattern(
-                "yyyy-MM-dd | HH:mm a");
-
-        String loginTime = dateTime.format(formatter);
-
-        data.setText(loginTime);
     }
 
     private void initializeRemoveTests() {
-        TextFields.bindAutoCompletion(removeTest, selectedTests).setOnAutoCompleted(e -> {
+
+        AutoCompletionBinding autoCompletionBinding = TextFields.bindAutoCompletion(removeTest, selectedTests);
+
+        autoCompletionBinding.setOnAutoCompleted(e -> {
             String testToRemove;
             testToRemove = removeTest.getText().split("-")[0];
             selectedTest.removeIf(test -> test.getName().equals(testToRemove));
@@ -291,6 +292,19 @@ public class NewPatientMenu extends Controller implements Initializable {
             removeTest.setText("");
             initializingTestsTableView();
         });
+
+    }
+
+    private void initializingRegisterData() {
+        dateTime = LocalDateTime.now();
+
+        DateTimeFormatter formatter
+                = DateTimeFormatter.ofPattern(
+                "yyyy-MM-dd | HH:mm a");
+
+        String loginTime = dateTime.format(formatter);
+
+        data.setText(loginTime);
     }
 
     private void initializingTestsTableView() {
@@ -465,5 +479,12 @@ public class NewPatientMenu extends Controller implements Initializable {
     void nameTextFieldAction(ActionEvent event) {
         fatherName.requestFocus();
     }
+
+    @FXML
+    void printButtonPressed(ActionEvent event) {
+
+
+    }
+
 
 }

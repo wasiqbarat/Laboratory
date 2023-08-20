@@ -1,6 +1,9 @@
 package classes;
 
+import java.util.Calendar;
+
 public enum Ability {
+    SYSTEM_INFO,
     ADD_STAFF,
     REMOVE_STAFF,
     ADD_PATIENT,
@@ -36,6 +39,9 @@ public enum Ability {
             }
             case "removeTest" -> {
                 return REMOVE_TEST;
+            }
+            case "systemInfo" -> {
+                return SYSTEM_INFO;
             }
         }
 

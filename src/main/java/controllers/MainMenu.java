@@ -9,8 +9,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Border;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -92,6 +94,7 @@ public class MainMenu extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Label label = new Label("this is");
         initializeFooter(footer);
     }
 
@@ -189,8 +192,7 @@ public class MainMenu extends Controller implements Initializable {
 
         stage.setScene(scene);
         stage.setMaximized(false);
-        stage.setWidth(900);
-        stage.setHeight(550);
+
         stage.show();
     }
 }

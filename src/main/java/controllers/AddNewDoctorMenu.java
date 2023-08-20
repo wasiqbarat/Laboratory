@@ -1,12 +1,16 @@
 package controllers;
 
-import classes.Doctor;
+import classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class AddNewDoctorMenu extends Controller{
 
@@ -43,6 +47,7 @@ public class AddNewDoctorMenu extends Controller{
         stage.close();
     }
 
+
     @FXML
     void saveButtonPressed(ActionEvent event) {
         String firstNameString = firstName.getText();
@@ -65,8 +70,31 @@ public class AddNewDoctorMenu extends Controller{
             return;
         }
 
+        User admin = labsSystem.getUser(usernameString);
+        if (admin == null) {
+            userNameAuthentication.setText("User not existed!");
+            userNameAuthentication.requestFocus();
+            return;
+        }
 
-        if (labsSystem.authentication(usernameString, passwordString)) {
+        ArrayList<String> doctors = new ArrayList<>();
+        for (Doctor doctor : labsSystem.getLaboratory().getDoctors()) {
+            doctors.add(doctor.getFirstName() + " " + doctor.getLastName());
+        }
+
+        if (admin.getRole().hasAbility(Ability.ADD_DOCTOR) ) {
+            if (!admin.getPassword().equals(passwordString)) {
+                passwordAuthentication.requestFocus();
+                return;
+            }
+
+            if (doctors.contains(firstNameString + " " + lastNameString)) {
+                firstName.setText("Already exists!");
+                firstName.requestFocus();
+                return;
+            }
+
+
             checkIfEmpty(nationalID);
             checkIfEmpty(age);
             checkIfEmpty(address);
@@ -84,12 +112,16 @@ public class AddNewDoctorMenu extends Controller{
 
             }
 
-
             Doctor doctor = new Doctor(firstNameString, lastNameString, fatherNameString, contact, addressString, age, nationalIDString, labsSystem.getLaboratory().getDoctors().size() + 1);
-
 
             try {
                 labsSystem.getLaboratory().addDoctor(doctor);
+
+                Log log = new Log(getCurrentUserName(), getCurrentPassword(), "Add doctor");
+                log.setInfo("New added doctor:\n" + "Name: " + doctor.getFirstName() + " " + doctor.getLastName() + "\nNational ID: " +
+                        doctor.getNationalID() + "\nRegister Date: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a")));
+                labsSystem.addLog(log);
+
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
 
@@ -99,9 +131,10 @@ public class AddNewDoctorMenu extends Controller{
 
 
         }else {
-            userNameAuthentication.setText("invalid user or password!");
+            userNameAuthentication.setText("You are not allowed!");
             userNameAuthentication.requestFocus();
         }
+
     }
 
     void checkIfEmpty(TextField textField) {

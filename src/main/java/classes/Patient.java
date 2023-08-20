@@ -11,7 +11,7 @@ public abstract class Patient extends Person{
 
     @Override
     public String toString() {
-        return super.toString() + "ID : " + ID;
+        return "Name: " + firstName + ", Father name: " + getFatherName() + ", Patient ID: " + ID;
     }
 
     public String getAgeUnit() {
@@ -21,4 +21,6 @@ public abstract class Patient extends Person{
     public void setAgeUnit(String ageUnit) {
         this.ageUnit = ageUnit;
     }
+
+
 }

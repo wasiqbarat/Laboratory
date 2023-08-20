@@ -1,6 +1,7 @@
 package classes;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Appointment {
@@ -79,12 +80,17 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{" +
-                "patient=" + patient +
-                ", doctor='" + doctor + '\'' +
-                ", description='" + description + '\'' +
-                ", appointmentDate=" + appointmentDate +
-                ", tests=" + tests +
-                '}';
+        StringBuilder testList = new StringBuilder();
+        int counter = 1;
+        for (Test test : tests) {
+            testList.append(counter).append(". ").append(test.getName()).append("\n");
+            counter++;
+        }
+
+        return "patient: ( " + patient.toString() +" )"+
+                "\nDoctor: " + doctor +
+                "\nRegister Date(تاریخ ثبت مریض): " + appointmentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a")) +
+                "\nTests :\n" + testList ;
     }
+
 }

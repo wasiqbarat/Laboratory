@@ -1,5 +1,6 @@
 package controllers;
 
+import classes.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class firstMenu extends Controller implements Initializable {
@@ -55,7 +59,9 @@ public class firstMenu extends Controller implements Initializable {
             setCurrentUserName(usernameString);
             setCurrentPassword(passwordString);
 
-            labsSystem.log(usernameString, passwordString);
+            Log log = new Log(usernameString, passwordString, "login");
+            log.setInfo("Login date(تاریخ و زمان ورود):    " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a")));
+            labsSystem.addLog(log);
 
             gotoMainMenu(event);
 
