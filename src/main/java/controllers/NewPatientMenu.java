@@ -1,6 +1,17 @@
 package controllers;
 
 import classes.*;
+import java.awt.*;
+
+import com.itextpdf.io.source.ByteArrayOutputStream;
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Style;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,15 +22,31 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.pdfbox.Loader;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.printing.PDFPageable;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
-
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.layout.Document;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Cell;
+import javax.print.*;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import java.awt.print.PrinterJob;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -126,6 +153,14 @@ public class NewPatientMenu extends Controller implements Initializable {
     private RadioButton year;
 
     @FXML
+    private Button print;
+
+    @FXML
+    private Button save;
+
+
+
+    @FXML
     void saveButtonPressed(ActionEvent event) {
         String nameString = name.getText();
         String fatherNameString = fatherName.getText();
@@ -179,12 +214,14 @@ public class NewPatientMenu extends Controller implements Initializable {
             }
         }
 
-        patient.setAgeUnit(ageUnit);
+
         if (selectedTest.isEmpty()) {
             testsTextField.requestFocus();
             return;
         } else {
             appointment = new Appointment(patient, doctorName, selectedTest);
+            appointment.setAgeUnit(ageUnit);
+            appointment.setSex(patientSex);
             appointment.setTotalFee(totalCostDouble);
         }
 
@@ -198,7 +235,7 @@ public class NewPatientMenu extends Controller implements Initializable {
             labsSystem.addLog(log);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
+            //stage.close();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -270,7 +307,6 @@ public class NewPatientMenu extends Controller implements Initializable {
     }
 
     private void initializeRemoveTests() {
-
         AutoCompletionBinding autoCompletionBinding = TextFields.bindAutoCompletion(removeTest, selectedTests);
 
         autoCompletionBinding.setOnAutoCompleted(e -> {
@@ -441,7 +477,6 @@ public class NewPatientMenu extends Controller implements Initializable {
         });
     }
 
-
     private void initializingAge() {
         year.setToggleGroup(a);
         month.setToggleGroup(a);
@@ -482,7 +517,389 @@ public class NewPatientMenu extends Controller implements Initializable {
 
     @FXML
     void printButtonPressed(ActionEvent event) {
+        if (appointment == null) {
+            save.requestFocus();
+            return;
+        }
+        String path = "C:/Users/wasiq/OneDrive/Desktop/PDFs/pdf2.pdf";
 
+
+        ArrayList<InRangeTestParameter> parameters = new ArrayList<>();
+        for (Test test : selectedTest) {
+            for (TestParameter testParameter : test.getParameters()) {
+                parameters.add((InRangeTestParameter) testParameter);
+            }
+        }
+        
+        try {
+            PdfWriter pdfWriter = new PdfWriter(path);
+            PdfDocument pdfDoc = new PdfDocument(pdfWriter);
+            Document document = new Document(pdfDoc);
+
+            String headerPath = "C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\Header.jpg";
+
+            ImageData data = ImageDataFactory.create(headerPath);
+            document.add(new com.itextpdf.layout.element.Image(data).setMargins(0, 0, 20, 0));
+            //document.add(new com.itextpdf.layout.element.Image(data).setFixedPosition(document.getRightMargin(), document.getRightMargin()));
+
+            float [] identityWidths = {65F, 120F, 58F, 120F, 60F, 100F};
+            Table identityTable = new Table(identityWidths);
+            identityTable.setMarginTop(10);
+
+
+            //identityTable.setBorder();
+
+            Cell idCell = new Cell();
+            idCell.add("Patient ID:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(idCell);
+
+            Cell id = new Cell();
+            id.add(String.valueOf(patient.getID())).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(id);
+
+            Cell refferedByCell = new Cell();
+            refferedByCell.add("Referred By:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(refferedByCell);
+
+            Cell referredBy = new Cell();
+            referredBy.add(String.valueOf(appointment.getDoctor())).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(referredBy);
+
+            Cell processTimeCell = new Cell();
+            processTimeCell.add(String.valueOf("Process time:")).setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(processTimeCell);
+
+            Cell processTime = new Cell();
+            processTime.add("").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(processTime);
+
+
+            Cell patientNameCell = new Cell();
+            patientNameCell.add("Patient Name:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(patientNameCell);
+
+            Cell patientName1 = new Cell();
+            patientName1.add(patient.getFirstName() + " " + patient.getLastName()).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(patientName1);
+
+            Cell contactCell = new Cell();
+            contactCell.add("Contact:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(contactCell);
+
+            Cell contact = new Cell();
+            contact.add(String.valueOf(patient.getContact())).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(contact);
+
+            Cell emailCell = new Cell();
+            emailCell.add("Email:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(emailCell);
+
+            Cell email1 = new Cell();
+            email1.add("email").setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(email1);
+
+            Cell ageSexCell = new Cell();
+            ageSexCell.add("Age / Sex:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(ageSexCell);
+
+            Cell ageSex = new Cell();
+            ageSex.add(patient.getAge() + "/" + appointment.getSex()).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(ageSex);
+
+            Cell addressCell = new Cell();
+            addressCell.add("Address:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(addressCell);
+
+            Cell address = new Cell();
+            address.add(patient.getAddress()).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(address);
+
+            Cell dateCell = new Cell();
+            dateCell.add("Date:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(dateCell);
+
+            Cell date1 = new Cell();
+            date1.add(appointment.getAppointmentDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a"))).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(date1);
+
+
+            document.add(identityTable);
+
+            //// Table
+            float [] pointColumnWidths = {20F, 200F, 200F, 70F, 70F, 100F};
+            Table table = new Table(pointColumnWidths);
+            table.setMarginTop(15);
+
+            Cell no = new Cell().setFontSize(10).setBold();
+            no.add("No");
+            no.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(no);
+
+            Cell testName = new Cell().setFontSize(10).setBold();
+            testName.add("Test name");
+            testName.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(testName);
+
+            Cell parameter = new Cell().setFontSize(10).setBold();
+            parameter.add("Parameter");
+            parameter.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(parameter);
+
+
+            Cell result = new Cell().setFontSize(10).setBold();
+            result.add("Result");
+            result.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(result);
+
+            Cell unit = new Cell().setFontSize(10).setBold();
+            unit.add("Unit");
+
+            unit.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(unit);
+
+            Cell normalRange = new Cell().setFontSize(10).setBold();
+            normalRange.add("Normal range");
+            normalRange.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(normalRange);
+
+            int counter = 1;
+            for (InRangeTestParameter testParameter : parameters) {
+                table.addCell(String.valueOf(counter)).setFontSize(10);
+                counter++;
+
+                table.addCell(testParameter.getTestName()).setFontSize(10);
+
+                table.addCell(testParameter.getName()).setFontSize(10);
+                table.addCell(testParameter.getResult()).setFontSize(10);
+                table.addCell(testParameter.getUnit()).setFontSize(10);
+                table.addCell(testParameter.getNormalRange()).setFontSize(10);
+            }
+
+            document.add(table);
+
+            Paragraph wasiq = new Paragraph("Developed by: Wasiq Barat");
+
+            document.add(wasiq.setFontSize(7));
+            document.close();
+
+            PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
+            PDDocument document1 = Loader.loadPDF(new File(path));
+
+            PrinterJob job = PrinterJob.getPrinterJob();
+            job.setPageable(new PDFPageable(document1));
+            job.setPrintService(defaultService);
+            job.print();
+            document1.close();
+
+
+            System.out.printf("Done!");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void main(String[] args) {
+        String path = "C:/Users/wasiq/OneDrive/Desktop/PDFs/pdf2.pdf";
+
+
+        //////
+        ArrayList<InRangeTestParameter> parameters = new ArrayList<>();
+        ArrayList<Test> tests = new ArrayList<>();
+
+
+        Test Brucellosis = new Test("BRUCELLOSIS", 200);
+        Test aptt = new Test("ACTIVATED PARCIAL THROMBIN TIM", 400);
+        TestParameter brucelosisAbortus = new InRangeTestParameter(new SimpleStringProperty("BRUCELOSIS Abortus"), new SimpleStringProperty(""), new SimpleStringProperty("1:80"), new SimpleStringProperty("1:20"), new SimpleStringProperty("BRUCELLOSIS"), new SimpleDoubleProperty(200) );
+        TestParameter brucelosisMelitensis = new InRangeTestParameter(new SimpleStringProperty("BRUCELOSIS Melitensis"),new SimpleStringProperty(""),new SimpleStringProperty("1:80"),new SimpleStringProperty( "1:20"),new SimpleStringProperty("BRUCELLOSIS"), new SimpleDoubleProperty(200));
+        parameters.add((InRangeTestParameter) brucelosisAbortus);
+        parameters.add((InRangeTestParameter) brucelosisMelitensis);
+        TestParameter pt = new InRangeTestParameter(new SimpleStringProperty("PT (PATIENT)"), new SimpleStringProperty("Sec"), new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty("ACTIVATED PARCIAL THROMBIN TIM"), new SimpleDoubleProperty(400));
+        TestParameter ptC = new InRangeTestParameter(new SimpleStringProperty("PT CONTROL"), new SimpleStringProperty("Sec"), new SimpleStringProperty(""), new SimpleStringProperty("14"), new SimpleStringProperty("ACTIVATED PARCIAL THROMBIN TIM"), new SimpleDoubleProperty(400));
+        TestParameter INR = new InRangeTestParameter(new SimpleStringProperty("INR"),new SimpleStringProperty( ""), new SimpleStringProperty(""), new SimpleStringProperty(""), new SimpleStringProperty("ACTIVATED PARCIAL THROMBIN TIM"), new SimpleDoubleProperty(400));
+        parameters.add((InRangeTestParameter) pt);
+        parameters.add((InRangeTestParameter) ptC);
+        parameters.add((InRangeTestParameter) INR);
+
+        aptt.addParameter(pt);
+        aptt.addParameter(ptC);
+        aptt.addParameter(INR);
+        Brucellosis.addParameter(brucelosisAbortus);
+        Brucellosis.addParameter(brucelosisMelitensis);
+
+        tests.add(Brucellosis);
+        tests.add(aptt);
+
+        Patient patient = new MalePatient("Majid", "nadim", "mohammad", 121212, "", 25, 12);
+        Appointment appointment = new Appointment(patient, "Samadi", tests);
+        //////////
+
+
+        try {
+            PdfWriter pdfWriter = new PdfWriter(path);
+            PdfDocument pdfDoc = new PdfDocument(pdfWriter);
+            Document document = new Document(pdfDoc);
+
+            String headerPath = "C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\Header.jpg";
+
+            ImageData data = ImageDataFactory.create(headerPath);
+            document.add(new com.itextpdf.layout.element.Image(data).setMargins(0, 0, 20, 0));
+            //document.add(new com.itextpdf.layout.element.Image(data).setFixedPosition(document.getRightMargin(), document.getRightMargin()));
+
+            float [] identityWidths = {65F, 120F, 58F, 120F, 60F, 100F};
+            Table identityTable = new Table(identityWidths);
+            identityTable.setMarginTop(10);
+
+
+            //identityTable.setBorder();
+
+            Cell idCell = new Cell();
+            idCell.add("Patient ID:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(idCell);
+
+            Cell id = new Cell();
+            id.add(String.valueOf(patient.getID())).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(id);
+
+            Cell refferedByCell = new Cell();
+            refferedByCell.add("Referred By:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(refferedByCell);
+
+            Cell referredBy = new Cell();
+            referredBy.add(String.valueOf(appointment.getDoctor())).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(referredBy);
+
+            Cell processTimeCell = new Cell();
+            processTimeCell.add(String.valueOf("Process time:")).setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(processTimeCell);
+
+            Cell processTime = new Cell();
+            processTime.add("").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(processTime);
+
+
+            Cell patientNameCell = new Cell();
+            patientNameCell.add("Patient Name:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(patientNameCell);
+
+            Cell patientName1 = new Cell();
+            patientName1.add(patient.getFirstName() + " " + patient.getLastName()).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(patientName1);
+
+            Cell contactCell = new Cell();
+            contactCell.add("Contact:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(contactCell);
+
+            Cell contact = new Cell();
+            contact.add(String.valueOf(patient.getContact())).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(contact);
+
+            Cell emailCell = new Cell();
+            emailCell.add("Email:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(emailCell);
+
+            Cell email1 = new Cell();
+            email1.add("email").setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(email1);
+
+            Cell ageSexCell = new Cell();
+            ageSexCell.add("Age / Sex:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(ageSexCell);
+
+            Cell ageSex = new Cell();
+            ageSex.add(patient.getAge() + "/" + appointment.getSex()).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(ageSex);
+
+            Cell addressCell = new Cell();
+            addressCell.add("Address:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(addressCell);
+
+            Cell address = new Cell();
+            address.add(patient.getAddress()).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(address);
+
+            Cell dateCell = new Cell();
+            dateCell.add("Date:").setFontSize(9).setBold().setBorder(Border.NO_BORDER);
+            identityTable.addCell(dateCell);
+
+            Cell date1 = new Cell();
+            date1.add(appointment.getAppointmentDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a"))).setFontSize(9).setBorder(Border.NO_BORDER);
+            identityTable.addCell(date1);
+
+
+            document.add(identityTable);
+
+            //// Table
+            float [] pointColumnWidths = {20F, 200F, 200F, 70F, 70F, 100F};
+            Table table = new Table(pointColumnWidths);
+            table.setMarginTop(15);
+
+            Cell no = new Cell().setFontSize(10).setBold();
+            no.add("No");
+            no.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(no);
+
+            Cell testName = new Cell().setFontSize(10).setBold();
+            testName.add("Test name");
+            testName.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(testName);
+
+            Cell parameter = new Cell().setFontSize(10).setBold();
+            parameter.add("Parameter");
+            parameter.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(parameter);
+
+
+            Cell result = new Cell().setFontSize(10).setBold();
+            result.add("Result");
+            result.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(result);
+
+            Cell unit = new Cell().setFontSize(10).setBold();
+            unit.add("Unit");
+
+            unit.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(unit);
+
+            Cell normalRange = new Cell().setFontSize(10).setBold();
+            normalRange.add("Normal range");
+            normalRange.setBackgroundColor(Color.LIGHT_GRAY);
+            table.addCell(normalRange);
+
+            int counter = 1;
+            for (InRangeTestParameter testParameter : parameters) {
+                table.addCell(String.valueOf(counter)).setFontSize(10);
+                counter++;
+
+                table.addCell(testParameter.getTestName()).setFontSize(10);
+
+                table.addCell(testParameter.getName()).setFontSize(10);
+                table.addCell(testParameter.getResult()).setFontSize(10);
+                table.addCell(testParameter.getUnit()).setFontSize(10);
+                table.addCell(testParameter.getNormalRange()).setFontSize(10);
+            }
+
+            document.add(table);
+
+            Paragraph wasiq = new Paragraph("Developed by: Wasiq Barat");
+
+            document.add(wasiq.setFontSize(7));
+            document.close();
+
+            PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
+            PDDocument document1 = Loader.loadPDF(new File(path));
+
+            PrinterJob job = PrinterJob.getPrinterJob();
+            job.setPageable(new PDFPageable(document1));
+            job.setPrintService(defaultService);
+            job.print();
+            document1.close();
+
+
+            System.out.printf("Done!");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
@@ -18,7 +19,7 @@ public class Application extends javafx.application.Application {
 
         stage.setScene(scene);
         stage.setResizable(false);
-
+        
         stage.show();
     }
 

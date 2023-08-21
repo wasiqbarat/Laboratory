@@ -12,6 +12,25 @@ public class Appointment {
     private LocalDateTime appointmentDate;
     private double totalFee;
 
+    private String sex;
+    private String ageUnit;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAgeUnit() {
+        return ageUnit;
+    }
+
+    public void setAgeUnit(String ageUnit) {
+        this.ageUnit = ageUnit;
+    }
+
     public double getTotalFee() {
         return totalFee;
     }

@@ -2,7 +2,11 @@ package classes;
 
 public abstract class Patient extends Person{
     protected final int ID;
-    protected String ageUnit;
+
+
+    public int getID() {
+        return ID;
+    }
 
     public Patient(String firstName, String lastName, String fatherName, int contact, String address, int age, int ID) {
         super(firstName, lastName,fatherName, contact, address, age);
@@ -12,14 +16,6 @@ public abstract class Patient extends Person{
     @Override
     public String toString() {
         return "Name: " + firstName + ", Father name: " + getFatherName() + ", Patient ID: " + ID;
-    }
-
-    public String getAgeUnit() {
-        return ageUnit;
-    }
-
-    public void setAgeUnit(String ageUnit) {
-        this.ageUnit = ageUnit;
     }
 
 

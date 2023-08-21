@@ -295,7 +295,7 @@
                   <Insets right="5.0" />
                </VBox.margin>
             </TitledPane>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printButtonPressed" prefHeight="59.0" prefWidth="64.0" text="Print">
+            <Button fx:id="print" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#printButtonPressed" prefHeight="59.0" prefWidth="64.0" text="Print">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -336,7 +336,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="62.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="45.0" prefWidth="151.0" text="Save" textFill="#1ac610">
+            <Button fx:id="save" alignment="CENTER" layoutX="62.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="45.0" prefWidth="151.0" text="Save" textFill="#1ac610">
                <HBox.margin>
                   <Insets bottom="7.0" left="40.0" right="40.0" top="10.0" />
                </HBox.margin>

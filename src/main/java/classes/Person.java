@@ -8,6 +8,15 @@ public class Person {
     private int contact;
     private int age;
     private String nationalID;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Person(String firstName, String lastName, String fatherName, int contact, String address, int age) {
         this.firstName = firstName;
