@@ -1,16 +1,22 @@
 package classes;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
-public abstract class TestParameter {
-    protected SimpleStringProperty name;
-    protected SimpleStringProperty unit;
-    protected SimpleStringProperty normalRange;
-    protected SimpleStringProperty testName;
-    protected SimpleDoubleProperty testPrice;
+import javax.swing.*;
+import java.io.*;
 
-    public TestParameter(SimpleStringProperty name, SimpleStringProperty unit, SimpleStringProperty normalRange, SimpleStringProperty testName, SimpleDoubleProperty testPrice) {
+public abstract class TestParameter implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 4L;
+
+    protected String name;
+    protected String unit;
+    protected String normalRange;
+    protected String testName;
+    protected double testPrice;
+
+    public TestParameter(String name, String unit, String normalRange, String testName, double testPrice) {
         this.name = name;
         this.unit = unit;
         this.normalRange = normalRange;
@@ -18,64 +24,61 @@ public abstract class TestParameter {
         this.testPrice = testPrice;
     }
 
-    public void setTestName(String newValue) {
-        testName = new SimpleStringProperty(newValue);
-    }
-
-    public void setName(String name) {
-        this.name.set(name);
-    }
-
-    public void setUnit(String unit) {
-        this.unit.set(unit);
-    }
-
-    public void setNormalRange(String normalRange) {
-        this.normalRange.set(normalRange);
-    }
-
-    public void setTestPrice(double testPrice) {
-        this.testPrice.set(testPrice);
-    }
-
     public String getName() {
-        return name.get();
-    }
-
-    public SimpleStringProperty nameProperty() {
         return name;
     }
 
-    public String getUnit() {
-        return unit.get();
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public SimpleStringProperty unitProperty() {
+    public String getUnit() {
         return unit;
     }
 
-    public String getNormalRange() {
-        return normalRange.get();
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
-    public SimpleStringProperty normalRangeProperty() {
+    public String getNormalRange() {
         return normalRange;
     }
 
-    public String getTestName() {
-        return testName.get();
+    public void setNormalRange(String normalRange) {
+        this.normalRange = normalRange;
     }
 
-    public SimpleStringProperty testNameProperty() {
+    public String getTestName() {
         return testName;
     }
 
-    public double getTestPrice() {
-        return testPrice.get();
+    public void setTestName(String testName) {
+        this.testName = testName;
     }
 
-    public SimpleDoubleProperty testPriceProperty() {
+    public double getTestPrice() {
         return testPrice;
     }
 
+    public void setTestPrice(double testPrice) {
+        this.testPrice = testPrice;
+    }
+
+    public static void main(String[] args) throws IOException {
+        File file = new File(new JFileChooser().getFileSystemView().getDefaultDirectory().toString() + "/Laboratory/invoice.pdf");
+
+        if (!file.exists()) {
+            try {
+                DataOutputStream objectOutputStream = new DataOutputStream(new FileOutputStream(file));
+                objectOutputStream.write(2);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.printf(new JFileChooser().getFileSystemView().getDefaultDirectory().toString());
+
+    }
 }
+

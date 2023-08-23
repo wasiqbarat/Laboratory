@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -73,7 +74,7 @@ public class MainMenu extends Controller implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle("Sohail laboratory (Add new patient)");
 
-        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
 
         stage.setScene(scene);
         stage.setMaximized(false);
@@ -87,6 +88,17 @@ public class MainMenu extends Controller implements Initializable {
 
     @FXML
     void financialDataButtonPressed(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open PDF File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+        Stage stage = new Stage();
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            System.out.printf(selectedFile.getPath());
+        }
+
 
     }
 
@@ -104,7 +116,7 @@ public class MainMenu extends Controller implements Initializable {
                 = DateTimeFormatter.ofPattern(
                 "yyyy-MM-dd | HH:mm a");
         String loginTime = LocalDateTime.now().format(formatter);
-        String identity = "You are logged in as (" + getCurrentUserName() + ")";
+        String identity = "         You are logged in as ( " + getCurrentUserName() + " )";
 
         log = identity +  "        login time(زمان ورود): ".concat(loginTime);
 
@@ -118,9 +130,10 @@ public class MainMenu extends Controller implements Initializable {
 
         URL url = new File("src/main/resources/controllers/firstMenu.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
         Scene scene = new Scene(root);
-
+        stage.setTitle("Sohail laboratory");
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
         stage.setScene(scene);
 
         stage.setHeight(450);
@@ -128,6 +141,8 @@ public class MainMenu extends Controller implements Initializable {
 
         stage.setResizable(false);
         stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 
     @FXML
@@ -139,7 +154,7 @@ public class MainMenu extends Controller implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle("Sohail laboratory");
 
-        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
 
         stage.setScene(scene);
 
@@ -155,7 +170,7 @@ public class MainMenu extends Controller implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle("Sohail laboratory");
 
-        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
 
         stage.setScene(scene);
         stage.show();
@@ -170,7 +185,7 @@ public class MainMenu extends Controller implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle("Sohail laboratory (Add new Test)");
 
-        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
 
         stage.setScene(scene);
         stage.setMaximized(false);
@@ -188,7 +203,7 @@ public class MainMenu extends Controller implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle("Sohail laboratory (System info)");
 
-        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Pharmacy\\assets\\report.png"));
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
 
         stage.setScene(scene);
         stage.setMaximized(false);

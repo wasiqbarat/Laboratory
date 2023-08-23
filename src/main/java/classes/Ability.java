@@ -44,7 +44,6 @@ public enum Ability {
                 return SYSTEM_INFO;
             }
         }
-
         return null;
     }
 }

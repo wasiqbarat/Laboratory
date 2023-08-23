@@ -58,7 +58,7 @@ public class Controller {
         stage.setWidth(950);
         stage.setHeight(640);
 
-        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\report.png"));
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
 
         stage.setResizable(true);
 
@@ -66,7 +66,6 @@ public class Controller {
 
         stage.show();
     }
-
 
 }
 

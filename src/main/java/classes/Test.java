@@ -1,9 +1,15 @@
 package classes;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Test {
+public class Test implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 3L;
+
+
     private String name;
     private double price;
     private ArrayList<TestParameter> parameters;

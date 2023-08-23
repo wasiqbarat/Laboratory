@@ -6,5 +6,4 @@ public class childPatient extends Patient{
         super(firstName, lastName, fatherName, contact, address, age, ID);
     }
 
-
 }

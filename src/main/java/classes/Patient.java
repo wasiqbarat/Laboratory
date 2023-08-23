@@ -17,6 +17,4 @@ public abstract class Patient extends Person{
     public String toString() {
         return "Name: " + firstName + ", Father name: " + getFatherName() + ", Patient ID: " + ID;
     }
-
-
 }

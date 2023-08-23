@@ -16,7 +16,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SystemInfoMenu extends Controller{
@@ -103,6 +102,5 @@ public class SystemInfoMenu extends Controller{
     void moreButtonPressed(ActionEvent event) {
 
     }
-
 
 }

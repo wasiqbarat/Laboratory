@@ -19,7 +19,6 @@ public class Doctor extends Person {
         registerData = LocalDateTime.now();
 
     }
-
     @Override
     public String toString() {
         return "Name: " + getFirstName() + " " + getLastName();

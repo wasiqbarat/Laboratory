@@ -95,6 +95,4 @@ public class Log {
     public void setLoginDateString(String loginDateString) {
         this.loginDateString.set(loginDateString);
     }
-
-
 }

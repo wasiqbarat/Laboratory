@@ -108,5 +108,4 @@ public class LabsSystem {
     public void addUser(User user) {
         users.add(user);
     }
-
 }

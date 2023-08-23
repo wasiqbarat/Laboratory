@@ -26,8 +26,6 @@ public class Person {
         this.age = age;
         this.fatherName = fatherName;
     }
-
-
     public String getFirstName() {
         return firstName;
     }

@@ -25,6 +25,4 @@ public class Staff extends Person{
         this.ID = ID;
         staffCount++;
     }
-
-
 }

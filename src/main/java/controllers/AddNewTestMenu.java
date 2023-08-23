@@ -1,9 +1,7 @@
 package controllers;
 
-import classes.InRangeTestParameter;
-import classes.LineNumbersCellFactory;
-import classes.Test;
-import classes.TestParameter;
+import classes.*;
+
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,8 +15,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -70,7 +70,7 @@ public class AddNewTestMenu extends Controller implements Initializable {
         test = new Test(testNameString, priceDouble);
 
         for (int i = 0; i < number; i++) {
-            TestParameter testParameter = new InRangeTestParameter(new SimpleStringProperty("?"), new SimpleStringProperty("?"), new SimpleStringProperty("?"), new SimpleStringProperty("?"), new SimpleStringProperty(testNameString), new SimpleDoubleProperty(priceDouble) );
+            TestParameter testParameter = new InRangeTestParameter("?", "?", "?", "?",testNameString, priceDouble);
             parameters.add(testParameter);
         }
 
@@ -185,9 +185,6 @@ public class AddNewTestMenu extends Controller implements Initializable {
         }
 
     }
-
-
-
 
     @FXML
     void cancelButtonPressed(ActionEvent event) {

@@ -15,14 +15,12 @@ public class Application extends javafx.application.Application {
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Sohail laboratory");
-        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\report.png"));
-
+        stage.getIcons().add(new Image("C:\\Users\\wasiq\\OneDrive\\Desktop\\Programming projects\\Laboratory\\src\\main\\resources\\assets\\icon1.png"));
+        //stage.getIcons().add(new Image("Icons/icon1.png"));
         stage.setScene(scene);
         stage.setResizable(false);
-        
         stage.show();
     }
-
     public static void main(String[] args) {
         launch();
     }

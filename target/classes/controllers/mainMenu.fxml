@@ -85,7 +85,10 @@
       </MenuBar>
    </top>
    <bottom>
-      <TextField fx:id="footer" editable="false" focusTraversable="false" prefHeight="31.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <TextField fx:id="footer" editable="false" focusTraversable="false" prefHeight="31.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="B Badr" size="12.0" />
+         </font></TextField>
    </bottom>
    <right>
       <VBox prefHeight="258.0" prefWidth="186.0" BorderPane.alignment="CENTER">
@@ -144,9 +147,9 @@
                   <Font name="Mistral" size="61.0" />
                </font>
             </Text>
-            <ImageView fitHeight="339.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="263.0" fitWidth="394.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/report.png" />
+                  <Image url="@../../../../../../Icons/drugs.png" />
                </image>
             </ImageView>
             <Text fill="#2453a4" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by Wasiq Barat">
@@ -156,6 +159,11 @@
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>
+            </Text>
+            <Text fill="#2453a4" layoutX="118.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
             </Text>
          </children>
       </VBox>

@@ -74,8 +74,13 @@ public class firstMenu extends Controller implements Initializable {
 
     }
 
+    @FXML
+    void usernameAction(ActionEvent event) {
+        password.requestFocus();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        username.requestFocus();
     }
 }

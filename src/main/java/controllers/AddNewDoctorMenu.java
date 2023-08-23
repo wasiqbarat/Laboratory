@@ -94,7 +94,6 @@ public class AddNewDoctorMenu extends Controller{
                 return;
             }
 
-
             checkIfEmpty(nationalID);
             checkIfEmpty(age);
             checkIfEmpty(address);

@@ -1,8 +1,11 @@
 package classes;
 
+import javax.swing.*;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Appointment {
     private Patient patient;
@@ -111,5 +114,4 @@ public class Appointment {
                 "\nRegister Date(تاریخ ثبت مریض): " + appointmentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a")) +
                 "\nTests :\n" + testList ;
     }
-
 }

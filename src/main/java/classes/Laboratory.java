@@ -3,6 +3,7 @@ package classes;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,10 +23,31 @@ public class Laboratory {
         doctors = new ArrayList<>();
         patients = new ArrayList<>();
         staff = new ArrayList<>();
-        tests = new ArrayList<>();
+        tests = loadTests();
         appointmentsHashMap = new HashMap<>();
         testCreation();
         doctorCreation();
+    }
+
+    public ArrayList<Test> loadTests() {
+        File file = new File("Files/tests.bin");
+
+        if (!file.exists()) {
+            tests = new ArrayList<>();
+            try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
+                outputStream.writeObject(tests);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return tests;
+        }
+
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
+            tests = (ArrayList<Test>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return tests;
     }
 
     public HashMap<Patient, ArrayList<Appointment>> getAppointmentsHashMap() {
@@ -38,6 +60,14 @@ public class Laboratory {
 
     public void addTest(Test test) {
         tests.add(test);
+
+        File file = new File("Files/tests.bin");
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
+            outputStream.writeObject(tests);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void addAppointment(Patient patient, Appointment appointment) {
@@ -54,7 +84,8 @@ public class Laboratory {
     }
 
     private void testCreation() {
-   /*     //1
+        //1
+/*
         Test Brucellosis = new Test("BRUCELLOSIS", 200);
         TestParameter brucelosisAbortus = new InRangeTestParameter("BRUCELOSIS Abortus","","1:80","1:20","BRUCELLOSIS", 200);
         TestParameter brucelosisMelitensis = new InRangeTestParameter("BRUCELOSIS Melitensis","","1:80", "1:20","BRUCELLOSIS", 200);
@@ -71,9 +102,10 @@ public class Laboratory {
         aptt.addParameter(pt);
         aptt.addParameter(ptC);
         aptt.addParameter(INR);
-        tests.add(aptt);*/
+        tests.add(aptt);
+*/
 
-        //1
+    /*    //1
         Test Brucellosis = new Test("BRUCELLOSIS", 200);
         TestParameter brucelosisAbortus = new InRangeTestParameter(new SimpleStringProperty("BRUCELOSIS Abortus"), new SimpleStringProperty(""), new SimpleStringProperty("1:80"), new SimpleStringProperty("1:20"), new SimpleStringProperty("BRUCELLOSIS"), new SimpleDoubleProperty(200) );
         TestParameter brucelosisMelitensis = new InRangeTestParameter(new SimpleStringProperty("BRUCELOSIS Melitensis"),new SimpleStringProperty(""),new SimpleStringProperty("1:80"),new SimpleStringProperty( "1:20"),new SimpleStringProperty("BRUCELLOSIS"), new SimpleDoubleProperty(200));
@@ -91,7 +123,7 @@ public class Laboratory {
         aptt.addParameter(ptC);
         aptt.addParameter(INR);
         tests.add(aptt);
-
+*/
         //3
 
     }
@@ -171,6 +203,4 @@ public class Laboratory {
     public void setTests(ArrayList<Test> tests) {
         this.tests = tests;
     }
-
-
 }
