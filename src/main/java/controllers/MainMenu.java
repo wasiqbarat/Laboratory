@@ -88,7 +88,7 @@ public class MainMenu extends Controller implements Initializable {
 
     @FXML
     void financialDataButtonPressed(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
+        /*FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open PDF File");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
 
@@ -97,7 +97,7 @@ public class MainMenu extends Controller implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile != null) {
             System.out.printf(selectedFile.getPath());
-        }
+        }*/
 
 
     }

@@ -221,7 +221,6 @@ public class NewPatientMenu extends Controller implements Initializable {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
-        alert.setHeaderText("Please confirm:");
         //alert.setContentText("Are you sure want to save?!");// line 4
 
 
@@ -717,6 +716,7 @@ public class NewPatientMenu extends Controller implements Initializable {
                 e.printStackTrace();
             }
         }
+
         private void createIdentityTable(Table identityTable) {
             //identityTable.setBorder();
 
@@ -795,5 +795,4 @@ public class NewPatientMenu extends Controller implements Initializable {
             date1.add(appointment.getAppointmentDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm a"))).setFontSize(fontSizeInteger - 1).setBorder(Border.NO_BORDER);
             identityTable.addCell(date1);
         }
-        
     }
